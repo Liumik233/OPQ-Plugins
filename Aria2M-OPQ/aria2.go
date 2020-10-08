@@ -16,6 +16,8 @@ func connaria2(url string, token string) rpc.Client {
 		log.Println("err:",err)
 		os.Exit(1)
 	}
+	ver,err:=rsp.GetVersion()
+	log.Println("connect successful,ver:",ver)
 	return rsp
 }
 
