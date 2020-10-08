@@ -84,8 +84,8 @@ func main() {
 			mess.iotqqType 消息类型 string
 		*/
 		log.Println("群聊消息: ", mess.FromNickName+"<"+strconv.FormatInt(mess.FromUserID, 10)+">: "+mess.Content)
-		if strings.HasPrefix("addurl",mess.Content) {
-			gid,err:=addurl(strings.Trim("addurl",mess.Content),aria2)
+		if strings.HasPrefix(mess.Content,"addurl") {
+			gid,err:=addurl(strings.Trim(mess.Content,"addurl"),aria2)
 			if err!=nil{
 				iotqq.Send(mess.FromGroupID,2,"gid:"+gid+",error:"+err.Error())
 			}else{
