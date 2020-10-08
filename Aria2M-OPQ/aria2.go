@@ -9,24 +9,25 @@ import (
 )
 
 func connaria2(url string, token string) rpc.Client {
-	ctx:=context.Background()
+	ctx := context.Background()
 	var no rpc.Notifier
-	rsp,err:=rpc.New(ctx,url,token,time.Second*3000,no)
-	if err!=nil{
-		log.Println("err:",err)
+	rsp, err := rpc.New(ctx, url, token, time.Second*3000, no)
+	if err != nil {
+		log.Println("err:", err)
 		os.Exit(1)
 	}
-	ver,err:=rsp.GetVersion()
-	log.Println("connect successful,ver:",ver.Version)
+	ver, err := rsp.GetVersion()
+	log.Println("connect successful,ver:", ver.Version)
 	return rsp
 }
 
-func addurl(url string,aria2 rpc.Client)(string,error){
-	gid,err:= aria2.AddURI(url)
-	if err!=nil{
-		return gid,err
+func addurl(url string, aria2 rpc.Client) (string, error) {
+	gid, err := aria2.AddURI(url)
+	if err != nil {
+		return gid, err
+		log.Println(err)
 	}
-	return gid,nil
+	return gid, nil
 }
 
 /*func addbt(url string, aria2 rpc.Client) (string, error) {
