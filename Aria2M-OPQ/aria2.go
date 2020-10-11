@@ -43,6 +43,7 @@ func addurl(url string, aria2 rpc.Client) (string, error) {
 func addmeta(url string, aria2 rpc.Client) ([]string, error) {
 	str := base64.StdEncoding.EncodeToString([]byte(url))
 	file, err := os.Open("./tmp/tmp.txt")
+	defer file.Close()
 	if err != nil {
 		log.Println(err)
 	}
