@@ -2,21 +2,19 @@ package main
 
 import (
 	"fmt"
+	"github.com/graarh/golang-socketio"
+	"github.com/graarh/golang-socketio/transport"
 	"iotqq/model"
 	"log"
 	"runtime"
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/graarh/golang-socketio"
-	"github.com/graarh/golang-socketio/transport"
 )
 
 var BotUrl, qq string
 var conf iotqq.Conf
 var zanok, qd []int64
-
 
 func periodlycall(d time.Duration, f func()) {
 	for x := range time.Tick(d) {
@@ -64,7 +62,7 @@ func main() {
 	fmt.Scan(&url)
 	fmt.Println("请输入token")
 	fmt.Scan(&token)
-	aria2:=connaria2(url,token)
+	aria2 := connaria2(url, token)
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	BotUrl = site + ":" + strconv.Itoa(port)
 	iotqq.Set(BotUrl, qq)
@@ -84,12 +82,12 @@ func main() {
 			mess.iotqqType 消息类型 string
 		*/
 		log.Println("群聊消息: ", mess.FromNickName+"<"+strconv.FormatInt(mess.FromUserID, 10)+">: "+mess.Content)
-		if strings.HasPrefix(mess.Content,"addurl") {
-			gid,err:=addurl(strings.Trim(mess.Content,"addurl"),aria2)
-			if err!=nil{
-				iotqq.Send(mess.FromGroupID,2,"gid:"+gid+",error:"+err.Error())
-			}else{
-				iotqq.Send(mess.FromGroupID,2,"Successful,gid:"+gid)
+		if strings.HasPrefix(mess.Content, "addurl") {
+			gid, err := addurl(strings.Trim(mess.Content, "addurl"), aria2)
+			if err != nil {
+				iotqq.Send(mess.FromGroupID, 2, "gid:"+gid+",error:"+err.Error())
+			} else {
+				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
 			}
 		}
 

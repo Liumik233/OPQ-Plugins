@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"github.com/zyxar/argo/rpc"
 	"log"
 	"os"
@@ -39,3 +40,17 @@ func addurl(url string, aria2 rpc.Client) (string, error) {
 	return gid,nil
 }*/
 //因api限制，暂时无法实现
+func addmeta(url string, aria2 rpc.Client) ([]string, error) {
+	str := base64.StdEncoding.EncodeToString([]byte(url))
+	file, err := os.Open("./tmp/tmp.txt")
+	if err != nil {
+		log.Println(err)
+	}
+	file.Write([]byte(str))
+	gid, err := aria2.AddMetalink("./tmp/tmp.txt")
+	if err != nil {
+		return gid, err
+		log.Println(err)
+	}
+	return gid, nil
+}
