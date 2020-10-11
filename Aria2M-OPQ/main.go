@@ -90,6 +90,14 @@ func main() {
 				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
 			}
 		}
+		if strings.HasPrefix(mess.Content, "addmeta") {
+			gid, err := addurl(strings.Trim(mess.Content, "addmet"), aria2)
+			if err != nil {
+				iotqq.Send(mess.FromGroupID, 2, "gid:"+gid+",error:"+err.Error())
+			} else {
+				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
+			}
+		}
 
 	})
 	if err != nil {
