@@ -91,7 +91,7 @@ func main() {
 			}
 		}
 		if strings.HasPrefix(mess.Content, "addmeta") {
-			gid, err := addurl(strings.Trim(mess.Content, "addmet"), aria2)
+			gid, err := addurl(strings.Trim(mess.Content, "addmeta"), aria2)
 			if err != nil {
 				iotqq.Send(mess.FromGroupID, 2, "gid:"+gid+",error:"+err.Error())
 			} else {
