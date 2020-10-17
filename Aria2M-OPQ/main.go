@@ -91,11 +91,14 @@ func main() {
 			}
 		}
 		if strings.HasPrefix(mess.Content, "addmeta") {
-			gid, err := addurl(strings.Trim(mess.Content, "addmeta"), aria2)
+			gid, err := addmeta(strings.Trim(mess.Content, "addmeta"), aria2)
 			if err != nil {
-				iotqq.Send(mess.FromGroupID, 2, "gid:"+gid+",error:"+err.Error())
+				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
-				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
+				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:")
+				for i := 0; i < len(gid); i++ {
+					iotqq.Send(mess.FromGroupID, 2, string(i+1)+","+gid[i])
+				}
 			}
 		}
 
