@@ -48,9 +48,9 @@ func addmeta(url string, aria2 rpc.Client) ([]string, error) {
 	if err != nil {
 		log.Println(err)
 	}
-	_, e := file.Write([]byte(str))
+	_, e := file.WriteString(str)
 	if e != nil {
-		log.Println(err)
+		log.Println(e)
 	}
 	gid, err := aria2.AddMetalink("/root/OPQ-Plugins/Aria2M-OPQ/tmp/tmp.txt")
 	if err != nil {
