@@ -43,7 +43,8 @@ func addurl(url string, aria2 rpc.Client) (string, error) {
 func addmeta(url string, aria2 rpc.Client) ([]string, error) {
 	str := base64.StdEncoding.EncodeToString([]byte(url))
 	log.Println(str)
-	file, err := os.Open("./tmp/tmp.txt")
+	file, err := os.OpenFile("./tmp/tmp.txt", os.O_WRONLY, os.ModeAppend)
+	defer os.Remove("./tmp/tmp.txt")
 	defer file.Close()
 	if err != nil {
 		log.Println(err)
@@ -52,7 +53,7 @@ func addmeta(url string, aria2 rpc.Client) ([]string, error) {
 	if e != nil {
 		log.Println(e)
 	}
-	gid, err := aria2.AddMetalink("/root/OPQ-Plugins/Aria2M-OPQ/tmp/tmp.txt")
+	gid, err := aria2.AddMetalink("./tmp/tmp.txt")
 	if err != nil {
 		return gid, err
 		log.Println(err)
