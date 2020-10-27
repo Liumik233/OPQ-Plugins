@@ -30,15 +30,15 @@ func addurl(url string, aria2 rpc.Client) (string, error) {
 	return gid, nil
 }
 
-/*func addbt(url string, aria2 rpc.Client) (string, error) {
+func addbt(url string, aria2 rpc.Client) (string, error) {
 
-	gid,err:=aria2.AddTorrent("./tmp/tmp.torrent")
-	if err!=nil{
-		return gid,err
+	gid, err := aria2.AddTorrent("./tmp/tmp.torrent")
+	if err != nil {
+		return gid, err
 	}
-	return gid,nil
-}*/
-//因api限制，暂时无法实现
+	return gid, nil
+}
+
 func file(gid string, aria2 rpc.Client) ([]rpc.FileInfo, error) {
 	rsp, err := aria2.GetFiles(gid)
 	if err != nil {

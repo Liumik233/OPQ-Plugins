@@ -20,8 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f4d1930-9c64-4dbf-b38b-b17de896131c" name="默认更改列表" comment="update">
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aria2.go" beforeDir="false" afterPath="$PROJECT_DIR$/aria2.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/iotqq.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/iotqq.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +39,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="C:\Users\25314\sdk\go1.14.3" />
+  <component name="GOROOT" path="C:\Users\LiumikHazne\go\go1.15.3" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -62,7 +66,7 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -89,9 +93,10 @@
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="WindowStateProjectService">
-    <state x="750" y="678" key="#GOROOT" timestamp="1602425917813">
-      <screen x="0" y="0" width="2160" height="1400" />
+    <state x="667" y="523" key="#GOROOT" timestamp="1603766065613">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="667" y="523" key="#GOROOT/0.0.1920.1080@0.0.1920.1080" timestamp="1603766065613" />
     <state x="750" y="678" key="#GOROOT/0.0.2160.1400@0.0.2160.1400" timestamp="1602425917813" />
     <state x="840" y="610" key="#Notifications" timestamp="1602935243139">
       <screen x="0" y="0" width="2160" height="1400" />
@@ -105,9 +110,10 @@
       <screen x="0" y="0" width="2160" height="1400" />
     </state>
     <state x="738" y="503" key="FileChooserDialogImpl/0.0.2160.1400@0.0.2160.1400" timestamp="1602935252957" />
-    <state x="581" y="344" key="SettingsEditor" timestamp="1602935545175">
-      <screen x="0" y="0" width="2160" height="1400" />
+    <state x="516" y="265" key="SettingsEditor" timestamp="1603766078158">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="516" y="265" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1603766078158" />
     <state x="581" y="344" key="SettingsEditor/0.0.2160.1400@0.0.2160.1400" timestamp="1602935545175" />
     <state x="672" y="433" key="Vcs.Push.Dialog.v2" timestamp="1602937022443">
       <screen x="0" y="0" width="2160" height="1400" />

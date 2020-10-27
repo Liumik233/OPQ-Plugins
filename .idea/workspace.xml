@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1631e9b3-3672-4550-ace2-405ef4c936ef" name="默认更改列表" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Aria2M-OPQ/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -9,7 +10,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="GOROOT" path="C:\Users\25314\sdk\go1.14.3" />
+  <component name="GOROOT" path="C:\Users\LiumikHazne\go\go1.15.3" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -29,19 +30,37 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="true" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Aria2M-OPQ" />
-    <property name="settings.editor.selected.configurable" value="go.dep" />
+    <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="738" y="502" key="FileChooserDialogImpl" timestamp="1602425901180">
-      <screen x="0" y="0" width="2160" height="1400" />
+    <state x="752" y="198" key="#GOPATH" timestamp="1603765950493">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="752" y="198" key="#GOPATH/0.0.1920.1080@0.0.1920.1080" timestamp="1603765950493" />
+    <state x="752" y="470" key="#GOROOT" timestamp="1603765433546">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="752" y="470" key="#GOROOT/0.0.1920.1080@0.0.1920.1080" timestamp="1603765433546" />
+    <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603765485750">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1603765485750" />
+    <state x="656" y="387" key="FileChooserDialogImpl" timestamp="1603766046778">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="656" y="387" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1603766046778" />
     <state x="738" y="502" key="FileChooserDialogImpl/0.0.2160.1400@0.0.2160.1400" timestamp="1602425901180" />
+    <state x="461" y="184" width="998" height="710" key="SettingsEditor" timestamp="1603765738118">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="461" y="184" width="998" height="710" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1603765738118" />
   </component>
 </project>
