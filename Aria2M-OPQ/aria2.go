@@ -12,7 +12,7 @@ import (
 func connaria2(url string, token string) rpc.Client {
 	ctx := context.Background()
 	var no rpc.Notifier
-	rsp, err := rpc.New(ctx, url, token, time.Second*3000, no)
+	rsp, err := rpc.New(ctx, url, token, time.Second*30, no)
 	if err != nil {
 		log.Println("err:", err)
 		os.Exit(1)
