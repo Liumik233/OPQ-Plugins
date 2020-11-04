@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/graarh/golang-socketio"
 	"github.com/graarh/golang-socketio/transport"
@@ -62,7 +63,8 @@ func main() {
 	fmt.Scan(&url)
 	fmt.Println("请输入token")
 	fmt.Scan(&token)
-	aria2 := connaria2(url, token)
+	aria2 := Connaria2(url, token)
+	defer aria2.Close()
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	BotUrl = site + ":" + strconv.Itoa(port)
 	iotqq.Set(BotUrl, qq)
@@ -74,6 +76,10 @@ func main() {
 	}
 
 	err = c.On("OnGroupMsgs", func(h *gosocketio.Channel, args iotqq.Message) {
+		fileinfo := struct {
+			FileID   string `FileID`
+			FileName string `FileName`
+		}{}
 		var mess iotqq.Data = args.CurrentPacket.Data
 		/*
 			mess.Content 消息内容 string
@@ -81,9 +87,10 @@ func main() {
 			mess.FromUserID 来源QQ int64
 			mess.iotqqType 消息类型 string
 		*/
+		json.Unmarshal([]byte(mess.Content), &fileinfo)
 		log.Println("群聊消息: ", mess.FromNickName+"<"+strconv.FormatInt(mess.FromUserID, 10)+">: "+mess.Content)
 		if strings.HasPrefix(mess.Content, "addurl") {
-			gid, err := addurl(strings.Trim(mess.Content, "addurl"), aria2)
+			gid, err := Addurl(strings.Trim(mess.Content, "addurl"), aria2)
 			if err != nil {
 				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
@@ -91,14 +98,22 @@ func main() {
 			}
 		}
 		if strings.HasPrefix(mess.Content, "status") {
-			rsp, err := filestatus(strings.Trim(mess.Content, "status"), aria2)
+			rsp, err := Filestatus(strings.Trim(mess.Content, "status"), aria2)
 			if err != nil {
 				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
 				iotqq.Send(mess.FromGroupID, 2, rsp)
 			}
 		}
-
+		if strings.HasPrefix(fileinfo.FileName, "addbt") {
+			rsp := iotqq.Getfile(mess.FromGroupID, fileinfo.FileID)
+			gid, err := Addbt(rsp, aria2)
+			if err != nil {
+				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
+			} else {
+				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
+			}
+		}
 	})
 	if err != nil {
 		log.Fatal(err)

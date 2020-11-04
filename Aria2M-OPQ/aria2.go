@@ -5,10 +5,11 @@ import (
 	"github.com/zyxar/argo/rpc"
 	"log"
 	"os"
+	"os/exec"
 	"time"
 )
 
-func connaria2(url string, token string) rpc.Client {
+func Connaria2(url string, token string) rpc.Client {
 	ctx := context.Background()
 	var no rpc.Notifier
 	rsp, err := rpc.New(ctx, url, token, time.Second*30, no)
@@ -21,7 +22,7 @@ func connaria2(url string, token string) rpc.Client {
 	return rsp
 }
 
-func addurl(url string, aria2 rpc.Client) (string, error) {
+func Addurl(url string, aria2 rpc.Client) (string, error) {
 	gid, err := aria2.AddURI(url)
 	if err != nil {
 		return gid, err
@@ -30,7 +31,9 @@ func addurl(url string, aria2 rpc.Client) (string, error) {
 	return gid, nil
 }
 
-func addbt(url string, aria2 rpc.Client) (string, error) {
+func Addbt(url string, aria2 rpc.Client) (string, error) {
+	cmd := exec.Command("wget", url, "-O ./tmp/tmp.torrent")
+	cmd.Run()
 	gid, err := aria2.AddTorrent("./tmp/tmp.torrent")
 	if err != nil {
 		return "err", err
@@ -38,7 +41,7 @@ func addbt(url string, aria2 rpc.Client) (string, error) {
 	return gid, nil
 }
 
-func filestatus(gid string, aria2 rpc.Client) (string, error) {
+func Filestatus(gid string, aria2 rpc.Client) (string, error) {
 	rsp, err := aria2.TellStatus(gid)
 	if err != nil {
 		return "err", err
@@ -49,4 +52,21 @@ func filestatus(gid string, aria2 rpc.Client) (string, error) {
 	} else {
 		return "状态：" + rsp.Status, err
 	}
+}
+
+func stop(gid string, aria2 rpc.Client) (string, error) {
+	rsp, err := aria2.Pause(gid)
+	if err != nil {
+		return "err", err
+		log.Println(err)
+	}
+	return rsp, nil
+}
+func start(gid string, aria2 rpc.Client) (string, error) {
+	rsp, err := aria2.Unpause(gid)
+	if err != nil {
+		return "err", err
+		log.Println(err)
+	}
+	return rsp, nil
 }

@@ -246,7 +246,7 @@ func Getinfo(qq1 int) string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	return string(body)
 }
-func getfile(groupid int, fileid string) string {
+func Getfile(groupid int, fileid string) string {
 
 	tmp := make(map[string]interface{})
 	tmp["groupid"] = groupid
