@@ -5,6 +5,7 @@ import (
 	"github.com/zyxar/argo/rpc"
 	"log"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -44,6 +45,7 @@ func filestatus(gid string, aria2 rpc.Client) (string, error) {
 		return "err", err
 		log.Println(err)
 	}
-	return "下载速度：" + rsp.DownloadSpeed + "\n下载进度：" + rsp.CompletedLength + "/" + rsp.TotalLength + rsp.Status, nil
-
+	ic, _ := strconv.Atoi(rsp.CompletedLength)
+	it, _ := strconv.Atoi(rsp.TotalLength)
+	return "下载速度：" + rsp.DownloadSpeed + "\n下载进度：" + strconv.Itoa(ic/it*100) + "%", nil
 }
