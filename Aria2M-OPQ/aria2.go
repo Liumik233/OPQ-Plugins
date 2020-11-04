@@ -5,7 +5,6 @@ import (
 	"github.com/zyxar/argo/rpc"
 	"log"
 	"os"
-	"strconv"
 	"time"
 )
 
@@ -34,7 +33,7 @@ func addurl(url string, aria2 rpc.Client) (string, error) {
 func addbt(url string, aria2 rpc.Client) (string, error) {
 	gid, err := aria2.AddTorrent("./tmp/tmp.torrent")
 	if err != nil {
-		return gid, err
+		return "err", err
 	}
 	return gid, nil
 }
@@ -45,7 +44,9 @@ func filestatus(gid string, aria2 rpc.Client) (string, error) {
 		return "err", err
 		log.Println(err)
 	}
-	ic, _ := strconv.Atoi(rsp.CompletedLength)
-	it, _ := strconv.Atoi(rsp.TotalLength)
-	return "下载速度：" + rsp.DownloadSpeed + "\n下载进度：" + strconv.Itoa(ic/it*100) + "%", nil
+	if rsp.Status == "active" {
+		return "状态：" + rsp.Status + "\n下载速度：" + rsp.DownloadSpeed + "\n下载进度：" + rsp.CompletedLength + "/" + rsp.TotalLength, err
+	} else {
+		return "状态：" + rsp.Status, err
+	}
 }

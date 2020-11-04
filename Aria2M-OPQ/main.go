@@ -85,7 +85,7 @@ func main() {
 		if strings.HasPrefix(mess.Content, "addurl") {
 			gid, err := addurl(strings.Trim(mess.Content, "addurl"), aria2)
 			if err != nil {
-				iotqq.Send(mess.FromGroupID, 2, "gid:"+gid+",error:"+err.Error())
+				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
 				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
 			}
