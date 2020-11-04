@@ -31,7 +31,6 @@ func addurl(url string, aria2 rpc.Client) (string, error) {
 }
 
 func addbt(url string, aria2 rpc.Client) (string, error) {
-
 	gid, err := aria2.AddTorrent("./tmp/tmp.torrent")
 	if err != nil {
 		return gid, err
@@ -39,11 +38,12 @@ func addbt(url string, aria2 rpc.Client) (string, error) {
 	return gid, nil
 }
 
-func file(gid string, aria2 rpc.Client) ([]rpc.FileInfo, error) {
-	rsp, err := aria2.GetFiles(gid)
+func filestatus(gid string, aria2 rpc.Client) (string, error) {
+	rsp, err := aria2.TellStatus(gid)
 	if err != nil {
-		return rsp, err
+		return "err", err
 		log.Println(err)
 	}
-	return rsp, nil
+	return "下载速度：" + rsp.DownloadSpeed + "\n下载进度：" + rsp.CompletedLength + "/" + rsp.TotalLength + rsp.Status, nil
+
 }

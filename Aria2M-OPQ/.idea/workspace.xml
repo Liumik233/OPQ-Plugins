@@ -19,11 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f4d1930-9c64-4dbf-b38b-b17de896131c" name="默认更改列表" comment="update">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="3f4d1930-9c64-4dbf-b38b-b17de896131c" name="默认更改列表" comment="add func getfile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aria2.go" beforeDir="false" afterPath="$PROJECT_DIR$/aria2.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/iotqq.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/iotqq.go" afterDir="false" />
     </list>
@@ -66,11 +64,11 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="go.sdk" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -87,7 +85,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add metalink" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="add func getfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="add func getfile" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -110,14 +109,15 @@
       <screen x="0" y="0" width="2160" height="1400" />
     </state>
     <state x="738" y="503" key="FileChooserDialogImpl/0.0.2160.1400@0.0.2160.1400" timestamp="1602935252957" />
-    <state x="516" y="265" key="SettingsEditor" timestamp="1603766078158">
+    <state x="516" y="265" key="SettingsEditor" timestamp="1603867105426">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="516" y="265" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1603766078158" />
+    <state x="516" y="265" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1603867105426" />
     <state x="581" y="344" key="SettingsEditor/0.0.2160.1400@0.0.2160.1400" timestamp="1602935545175" />
-    <state x="672" y="433" key="Vcs.Push.Dialog.v2" timestamp="1602937022443">
-      <screen x="0" y="0" width="2160" height="1400" />
+    <state x="597" y="334" key="Vcs.Push.Dialog.v2" timestamp="1603767005433">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="597" y="334" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1603767005433" />
     <state x="672" y="433" key="Vcs.Push.Dialog.v2/0.0.2160.1400@0.0.2160.1400" timestamp="1602937022443" />
     <state x="873" y="613" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602935563997">
       <screen x="0" y="0" width="2160" height="1400" />

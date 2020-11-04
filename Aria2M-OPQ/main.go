@@ -90,15 +90,12 @@ func main() {
 				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
 			}
 		}
-		if strings.HasPrefix(mess.Content, "filelist") {
-			rsp, err := file(strings.Trim(mess.Content, "filelist"), aria2)
+		if strings.HasPrefix(mess.Content, "status") {
+			rsp, err := filestatus(strings.Trim(mess.Content, "status"), aria2)
 			if err != nil {
 				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
-				iotqq.Send(mess.FromGroupID, 2, "Successful,list:")
-				for i := 0; i < len(rsp); i++ {
-					iotqq.Send(mess.FromGroupID, 2, string(i+1)+","+rsp[i].Index)
-				}
+				iotqq.Send(mess.FromGroupID, 2, rsp)
 			}
 		}
 
