@@ -261,7 +261,7 @@ func Getfile(groupid int, fileid string) string {
 	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
-	log.Println(string(body))
+	//log.Println(string(body))
 	json.Unmarshal(body, &url)
 	return url.Url
 }
