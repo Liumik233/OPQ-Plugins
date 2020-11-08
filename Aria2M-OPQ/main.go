@@ -91,7 +91,7 @@ func main() {
 		}
 		c1.Write(tmp1)
 	}
-	c1, err := os.Open("config.json")
+	c1, err := os.Open("./config.json")
 	defer c1.Close()
 	if err != nil {
 		log.Println("err:", err)
