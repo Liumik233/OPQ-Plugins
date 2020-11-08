@@ -106,7 +106,7 @@ func main() {
 			}
 		}
 		if strings.HasPrefix(fileinfo.FileName, "addbt") {
-			rsp := iotqq.Getfile(mess.FromGroupID, "2360ca58-21cd-11eb-ad48-5452007beaa8")
+			rsp := iotqq.Getfile(mess.FromGroupID, strings.TrimPrefix(fileinfo.FileID, "/"))
 			log.Println(fileinfo.FileID)
 			gid, err := Addbt(rsp, aria2)
 			if err != nil {
