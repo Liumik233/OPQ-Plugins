@@ -91,17 +91,13 @@ func main() {
 		}
 		c1.Write(tmp1)
 	}
-	c1, err := os.Open("./config.json")
+	c1, err := os.OpenFile("./config.json", os.O_RDONLY, 0600)
 	defer c1.Close()
 	if err != nil {
 		log.Println("openerr:", err)
 		os.Exit(1)
 	}
-	cb, err := ioutil.ReadAll(c1)
-	if err != nil {
-		log.Println("openerr:", err)
-		os.Exit(1)
-	}
+	cb, _ := ioutil.ReadAll(c1)
 	conf1 := struct {
 		site  string `site`
 		port  int    `port`
