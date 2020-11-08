@@ -94,7 +94,7 @@ func main() {
 	c1, err := os.Open("./config.json")
 	defer c1.Close()
 	if err != nil {
-		log.Println("err:", err)
+		log.Println("openerr:", err)
 		os.Exit(1)
 	}
 	cb, _ := ioutil.ReadAll(c1)
