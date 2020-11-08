@@ -26,7 +26,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f4d1930-9c64-4dbf-b38b-b17de896131c" name="默认更改列表" comment="test">
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,15 +131,15 @@
       <screen x="0" y="0" width="2160" height="1400" />
     </state>
     <state x="738" y="503" key="FileChooserDialogImpl/0.0.2160.1400@0.0.2160.1400" timestamp="1602935252957" />
-    <state x="516" y="265" key="SettingsEditor" timestamp="1604843398090">
+    <state x="516" y="265" key="SettingsEditor" timestamp="1604843796455">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="516" y="265" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1604843398090" />
+    <state x="516" y="265" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1604843796455" />
     <state x="581" y="344" key="SettingsEditor/0.0.2160.1400@0.0.2160.1400" timestamp="1602935545175" />
-    <state x="597" y="334" key="Vcs.Push.Dialog.v2" timestamp="1604843410135">
+    <state x="597" y="334" key="Vcs.Push.Dialog.v2" timestamp="1604843684848">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="597" y="334" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1604843410135" />
+    <state x="597" y="334" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1604843684848" />
     <state x="672" y="433" key="Vcs.Push.Dialog.v2/0.0.2160.1400@0.0.2160.1400" timestamp="1602937022443" />
     <state x="873" y="613" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602935563997">
       <screen x="0" y="0" width="2160" height="1400" />
