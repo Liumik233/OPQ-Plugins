@@ -252,7 +252,7 @@ func Getfile(groupid int, fileid string) string {
 	tmp["groupid"] = groupid
 	tmp["fileid"] = fileid
 	tmp1, _ := json.Marshal(tmp)
-	log.Println(tmp1)
+	log.Println(string(tmp1))
 	resp, err := (http.Post("http://"+url1+"/v1/LuaApiCaller?funcname=OidbSvc.0x6d6_2&timeout=10&qq="+qq, "application/json", bytes.NewBuffer(tmp1)))
 	if err != nil {
 		log.Fatal(err)
