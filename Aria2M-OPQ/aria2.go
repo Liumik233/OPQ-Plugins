@@ -38,7 +38,7 @@ func Addbt(url string, aria2 rpc.Client) (string, error) {
 		return "err", err
 	}*/
 	log.Println(url)
-	return gid, nil
+	return /*gid,*/ "test", nil
 }
 
 func Filestatus(gid string, aria2 rpc.Client) (string, error) {
