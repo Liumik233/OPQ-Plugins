@@ -19,11 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f4d1930-9c64-4dbf-b38b-b17de896131c" name="默认更改列表" comment="add func getfile">
+    <list default="true" id="3f4d1930-9c64-4dbf-b38b-b17de896131c" name="默认更改列表" comment="add func&#10;- start&#10;- stop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aria2.go" beforeDir="false" afterPath="$PROJECT_DIR$/aria2.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/iotqq.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/iotqq.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,18 +50,20 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
-    <property name="GO_FMT" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="configurable.全局.GOPATH.is.expanded" value="true" />
+    <property name="configurable.模块.GOPATH.is.expanded" value="false" />
+    <property name="configurable.项目.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,7 +85,10 @@
     <MESSAGE value="add metalink" />
     <MESSAGE value="update" />
     <MESSAGE value="add func getfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="add func getfile" />
+    <MESSAGE value="add func filestatus" />
+    <MESSAGE value="fix bugs" />
+    <MESSAGE value="add func&#10;- start&#10;- stop" />
+    <option name="LAST_COMMIT_MESSAGE" value="add func&#10;- start&#10;- stop" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -109,15 +111,15 @@
       <screen x="0" y="0" width="2160" height="1400" />
     </state>
     <state x="738" y="503" key="FileChooserDialogImpl/0.0.2160.1400@0.0.2160.1400" timestamp="1602935252957" />
-    <state x="516" y="265" key="SettingsEditor" timestamp="1603867105426">
+    <state x="516" y="265" key="SettingsEditor" timestamp="1604496031867">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="516" y="265" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1603867105426" />
+    <state x="516" y="265" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1604496031867" />
     <state x="581" y="344" key="SettingsEditor/0.0.2160.1400@0.0.2160.1400" timestamp="1602935545175" />
-    <state x="597" y="334" key="Vcs.Push.Dialog.v2" timestamp="1603767005433">
+    <state x="597" y="334" key="Vcs.Push.Dialog.v2" timestamp="1604500591275">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="597" y="334" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1603767005433" />
+    <state x="597" y="334" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1604500591275" />
     <state x="672" y="433" key="Vcs.Push.Dialog.v2/0.0.2160.1400@0.0.2160.1400" timestamp="1602937022443" />
     <state x="873" y="613" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602935563997">
       <screen x="0" y="0" width="2160" height="1400" />
