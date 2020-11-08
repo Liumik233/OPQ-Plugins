@@ -3,6 +3,7 @@
   <component name="ProjectTasksOptions">
     <enabled-global>
       <option value="go fmt" />
+      <option value="go fmt" />
     </enabled-global>
   </component>
 </project>
