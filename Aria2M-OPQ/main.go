@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"github.com/graarh/golang-socketio"
 	"github.com/graarh/golang-socketio/transport"
+	"io/ioutil"
 	"iotqq/model"
 	"log"
+	"os"
 	"runtime"
 	"strconv"
 	"strings"
@@ -22,6 +24,16 @@ func periodlycall(d time.Duration, f func()) {
 		f()
 		log.Println(x)
 	}
+}
+func Exists(path string) bool {
+	_, err := os.Stat(path) //os.Stat获取文件信息
+	if err != nil {
+		if os.IsExist(err) {
+			return true
+		}
+		return false
+	}
+	return true
 }
 func resetzan() {
 
@@ -46,30 +58,62 @@ func SendJoin(c *gosocketio.Client) {
 	}
 }
 func main() {
-	var url string
-	var site string
-	var port int
-	var token string
-	port = 8888
 	fmt.Println("BigPic_for_OPQ_ver.0.01a")
 	fmt.Println("作者:Liumik")
-	fmt.Println("\n请输入OPQ的Web地址(无需http://和端口): ")
-	fmt.Scan(&site)
-	fmt.Println("\n请输入OPQ的端口号: ")
-	fmt.Scan(&port)
-	fmt.Println("\n请输入QQ机器人账号: ")
-	fmt.Scan(&qq)
-	fmt.Println("\n请输入url")
-	fmt.Scan(&url)
-	fmt.Println("请输入token")
-	fmt.Scan(&token)
-	aria2 := Connaria2(url, token)
+	if !Exists("config.json") {
+		tmp := make(map[string]interface{})
+		var url string
+		var site string
+		var port int
+		var token string
+		port = 8888
+		fmt.Println("\n请输入OPQ的Web地址(无需http://和端口): ")
+		fmt.Scan(&site)
+		fmt.Println("\n请输入OPQ的端口号: ")
+		fmt.Scan(&port)
+		fmt.Println("\n请输入QQ机器人账号: ")
+		fmt.Scan(&qq)
+		fmt.Println("\n请输入url")
+		fmt.Scan(&url)
+		fmt.Println("请输入token")
+		fmt.Scan(&token)
+		tmp["site"] = site
+		tmp["port"] = port
+		tmp["qq"] = qq
+		tmp["url"] = url
+		tmp["token"] = token
+		tmp1, _ := json.Marshal(tmp)
+		c1, err := os.Create("config.json")
+		defer c1.Close()
+		if err != nil {
+			log.Println("err:", err)
+			os.Exit(1)
+		}
+		c1.Write(tmp1)
+	}
+	c1, err := os.Open("config.json")
+	defer c1.Close()
+	if err != nil {
+		log.Println("err:", err)
+		os.Exit(1)
+	}
+	cb, _ := ioutil.ReadAll(c1)
+	conf1 := struct {
+		site  string `site`
+		port  int    `port`
+		qq    string `qq`
+		url   string `url`
+		token string `token`
+	}{}
+	json.Unmarshal(cb, &conf1)
+	qq = conf1.qq
+	aria2 := Connaria2(conf1.url, conf1.token)
 	defer aria2.Close()
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	BotUrl = site + ":" + strconv.Itoa(port)
+	BotUrl = conf1.site + ":" + strconv.Itoa(conf1.port)
 	iotqq.Set(BotUrl, qq)
 	c, err := gosocketio.Dial(
-		gosocketio.GetUrl(site, port, false),
+		gosocketio.GetUrl(conf1.site, conf1.port, false),
 		transport.GetDefaultWebsocketTransport())
 	if err != nil {
 		log.Fatal(err)
