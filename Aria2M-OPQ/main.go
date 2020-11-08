@@ -86,7 +86,7 @@ func main() {
 		c1, err := os.Create("config.json")
 		defer c1.Close()
 		if err != nil {
-			log.Println("err:", err)
+			log.Println("cerr:", err)
 			os.Exit(1)
 		}
 		c1.Write(tmp1)
