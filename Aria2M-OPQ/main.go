@@ -134,16 +134,16 @@ func main() {
 		json.Unmarshal([]byte(mess.Content), &fileinfo)
 		log.Println("群聊消息: ", mess.FromNickName+"<"+strconv.FormatInt(mess.FromUserID, 10)+">: "+mess.Content)
 		if strings.HasPrefix(mess.Content, "addurl") {
-			gid, err := Addurl(strings.Trim(mess.Content, "addurl"), aria2)
-			if err != nil {
+			gid, err1 := Addurl(strings.Trim(mess.Content, "addurl"), aria2)
+			if err1 != nil {
 				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
 				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
 			}
 		}
 		if strings.HasPrefix(mess.Content, "status") {
-			rsp, err := Filestatus(strings.Trim(mess.Content, "status"), aria2)
-			if err != nil {
+			rsp, err1 := Filestatus(strings.Trim(mess.Content, "status"), aria2)
+			if err1 != nil {
 				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
 				iotqq.Send(mess.FromGroupID, 2, rsp)
@@ -151,8 +151,8 @@ func main() {
 		}
 		if strings.HasPrefix(fileinfo.FileName, "addbt") {
 			rsp := iotqq.Getfile(mess.FromGroupID, fileinfo.FileID)
-			gid, err := Addbt(rsp, aria2)
-			if err != nil {
+			gid, err1 := Addbt(rsp, aria2)
+			if err1 != nil {
 				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
 				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
