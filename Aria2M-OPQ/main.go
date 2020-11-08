@@ -60,7 +60,7 @@ func SendJoin(c *gosocketio.Client) {
 func main() {
 	fmt.Println("BigPic_for_OPQ_ver.0.01a")
 	fmt.Println("作者:Liumik")
-	if !Exists("config.json") {
+	if !Exists("./config.json") {
 		tmp := make(map[string]interface{})
 		var url string
 		var site string
@@ -97,7 +97,11 @@ func main() {
 		log.Println("openerr:", err)
 		os.Exit(1)
 	}
-	cb, _ := ioutil.ReadAll(c1)
+	cb, err := ioutil.ReadAll(c1)
+	if err != nil {
+		log.Println("openerr:", err)
+		os.Exit(1)
+	}
 	conf1 := struct {
 		site  string `site`
 		port  int    `port`
