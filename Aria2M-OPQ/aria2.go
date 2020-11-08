@@ -32,6 +32,7 @@ func Addurl(url string, aria2 rpc.Client) (string, error) {
 }
 
 func Addbt(url string, aria2 rpc.Client) (string, error) {
+	log.Println(url)
 	cmd := exec.Command("wget", url, "-O ./tmp/tmp.torrent")
 	cmd.Run()
 	gid, err := aria2.AddTorrent("./tmp/tmp.torrent")
