@@ -77,11 +77,11 @@ func main() {
 		fmt.Scan(&url)
 		fmt.Println("请输入token")
 		fmt.Scan(&token)
-		tmp["site"] = site
-		tmp["port"] = port
-		tmp["qq"] = qq
-		tmp["url"] = url
-		tmp["token"] = token
+		tmp["Site"] = site
+		tmp["Port"] = port
+		tmp["Qq"] = qq
+		tmp["Url"] = url
+		tmp["Token"] = token
 		tmp1, _ := json.Marshal(tmp)
 		c1, err := os.Create("config.json")
 		defer c1.Close()
@@ -99,21 +99,21 @@ func main() {
 	}
 	cb, _ := ioutil.ReadAll(c1)
 	conf1 := struct {
-		site  string `site`
-		port  int    `port`
-		qq    string `qq`
-		url   string `url`
-		token string `token`
+		Site  string `Site`
+		Port  int    `Port`
+		Qq    string `Qq`
+		Url   string `Url`
+		Token string `Token`
 	}{}
 	json.Unmarshal(cb, &conf1)
-	qq = conf1.qq
-	aria2 := Connaria2(conf1.url, conf1.token)
+	qq = conf1.Qq
+	aria2 := Connaria2(conf1.Url, conf1.Token)
 	defer aria2.Close()
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	BotUrl = conf1.site + ":" + strconv.Itoa(conf1.port)
+	BotUrl = conf1.Site + ":" + strconv.Itoa(conf1.Port)
 	iotqq.Set(BotUrl, qq)
 	c, err := gosocketio.Dial(
-		gosocketio.GetUrl(conf1.site, conf1.port, false),
+		gosocketio.GetUrl(conf1.Site, conf1.Port, false),
 		transport.GetDefaultWebsocketTransport())
 	if err != nil {
 		log.Fatal(err)
