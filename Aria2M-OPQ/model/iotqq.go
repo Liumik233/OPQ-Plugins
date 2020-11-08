@@ -249,8 +249,8 @@ func Getinfo(qq1 int) string {
 func Getfile(groupid int, fileid string) string {
 
 	tmp := make(map[string]interface{})
-	tmp["groupid"] = groupid
-	tmp["fileid"] = fileid
+	tmp["GroupID"] = groupid
+	tmp["FileID"] = fileid
 	tmp1, _ := json.Marshal(tmp)
 	log.Println(string(tmp1))
 	resp, err := (http.Post("http://"+url1+"/v1/LuaApiCaller?funcname=OidbSvc.0x6d6_2&timeout=10&qq="+qq, "application/json", bytes.NewBuffer(tmp1)))
