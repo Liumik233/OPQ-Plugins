@@ -159,19 +159,27 @@ func main() {
 			}
 		}
 		if strings.HasPrefix(mess.Content, "stop") {
-			rsp, err := Stop(strings.TrimPrefix(mess.Content, "stop"), aria2)
+			err := Stop(strings.TrimPrefix(mess.Content, "stop"), aria2)
 			if err != nil {
 				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
-				iotqq.Send(mess.FromGroupID, 2, "Successful,rsp:"+rsp)
+				iotqq.Send(mess.FromGroupID, 2, "Successful")
 			}
 		}
 		if strings.HasPrefix(mess.Content, "start") {
-			rsp, err := Start(strings.TrimPrefix(mess.Content, "start"), aria2)
+			err := Start(strings.TrimPrefix(mess.Content, "start"), aria2)
 			if err != nil {
 				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
 			} else {
-				iotqq.Send(mess.FromGroupID, 2, "Successful,rsp:"+rsp)
+				iotqq.Send(mess.FromGroupID, 2, "Successful")
+			}
+			if strings.HasPrefix(mess.Content, "del") {
+				err := Del(strings.TrimPrefix(mess.Content, "del"), aria2)
+				if err != nil {
+					iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
+				} else {
+					iotqq.Send(mess.FromGroupID, 2, "Successful")
+				}
 			}
 		}
 	})
