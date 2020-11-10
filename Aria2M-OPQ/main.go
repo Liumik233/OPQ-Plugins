@@ -184,9 +184,7 @@ func main() {
 			}
 		}
 		if mess.Content == "help" {
-			iotqq.Send(mess.FromGroupID, 2, "----L-Downloader-Help----\n说明：\n本bot通过文字指令添加任务到aria2实现离线下载。下载完成后自动上传至世纪互联版OneDrive，用户可通过访问http://r6d.cn/C4qm获取所下载的文件")
-			iotqq.Send(mess.FromGroupID, 2, "已实现的功能：\n添加链接任务——addurl+链接\n添加bt任务——直接上传种子文件到群文件，文件名加入前缀addbt\n查看任务状态——status+gid\n停止任务——stop+gid\n开始任务——start+gid\n删除任务——del+gid")
-			iotqq.Send(mess.FromGroupID, 2, "本bot提供的服务永久免费，但作者个人所能用于维护本bot的费用有限，未来有较高几率停止服务")
+			iotqq.Send(mess.FromGroupID, 2, "----L-Downloader-Help----\n说明：\n本bot通过文字指令添加任务到aria2实现离线下载。下载完成后自动上传至世纪互联版OneDrive，用户可通过访问http://r6d.cn/C4qm获取所下载的文件\n已实现的功能：\n添加链接任务——addurl+链接\n添加bt任务——直接上传种子文件到群文件，文件名加入前缀addbt\n查看任务状态——status+gid\n停止任务——stop+gid\n开始任务——start+gid\n删除任务——del+gid\n----L-Downloader-Help----\n本bot提供的服务永久免费，但作者个人所能用于维护本bot的费用有限，未来有较高几率停止服务")
 		}
 	})
 	if err != nil {
