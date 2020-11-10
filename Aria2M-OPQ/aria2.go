@@ -55,7 +55,7 @@ func Filestatus(gid string, aria2 rpc.Client) (string, error) {
 	}
 }
 
-func stop(gid string, aria2 rpc.Client) (string, error) {
+func Stop(gid string, aria2 rpc.Client) (string, error) {
 	rsp, err := aria2.Pause(gid)
 	if err != nil {
 		return "err", err
@@ -63,7 +63,7 @@ func stop(gid string, aria2 rpc.Client) (string, error) {
 	}
 	return rsp, nil
 }
-func start(gid string, aria2 rpc.Client) (string, error) {
+func Start(gid string, aria2 rpc.Client) (string, error) {
 	rsp, err := aria2.Unpause(gid)
 	if err != nil {
 		return "err", err

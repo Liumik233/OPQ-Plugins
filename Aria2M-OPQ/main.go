@@ -158,6 +158,22 @@ func main() {
 				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
 			}
 		}
+		if strings.HasPrefix(mess.Content, "stop") {
+			rsp, err := Stop(strings.TrimPrefix(mess.Content, "stop"), aria2)
+			if err != nil {
+				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
+			} else {
+				iotqq.Send(mess.FromGroupID, 2, "Successful,rsp:"+rsp)
+			}
+		}
+		if strings.HasPrefix(mess.Content, "start") {
+			rsp, err := Start(strings.TrimPrefix(mess.Content, "start"), aria2)
+			if err != nil {
+				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
+			} else {
+				iotqq.Send(mess.FromGroupID, 2, "Successful,rsp:"+rsp)
+			}
+		}
 	})
 	if err != nil {
 		log.Fatal(err)
