@@ -25,9 +25,8 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f4d1930-9c64-4dbf-b38b-b17de896131c" name="默认更改列表" comment="testing">
+    <list default="true" id="3f4d1930-9c64-4dbf-b38b-b17de896131c" name="默认更改列表" comment="add help">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aria2.go" beforeDir="false" afterPath="$PROJECT_DIR$/aria2.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,11 +105,15 @@
     <MESSAGE value="update" />
     <MESSAGE value="add func getfile" />
     <MESSAGE value="add func filestatus" />
-    <MESSAGE value="fix bugs" />
     <MESSAGE value="add func&#10;- start&#10;- stop" />
     <MESSAGE value="test" />
     <MESSAGE value="testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing" />
+    <MESSAGE value="add start and stop" />
+    <MESSAGE value="add del" />
+    <MESSAGE value="del GroupMsgs log" />
+    <MESSAGE value="fix bugs" />
+    <MESSAGE value="add help" />
+    <option name="LAST_COMMIT_MESSAGE" value="add help" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -139,10 +142,10 @@
     </state>
     <state x="516" y="265" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1604844728344" />
     <state x="581" y="344" key="SettingsEditor/0.0.2160.1400@0.0.2160.1400" timestamp="1602935545175" />
-    <state x="597" y="334" key="Vcs.Push.Dialog.v2" timestamp="1604851940543">
+    <state x="597" y="334" key="Vcs.Push.Dialog.v2" timestamp="1604975897802">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="597" y="334" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1604851940543" />
+    <state x="597" y="334" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1604975897802" />
     <state x="672" y="433" key="Vcs.Push.Dialog.v2/0.0.2160.1400@0.0.2160.1400" timestamp="1602937022443" />
     <state x="873" y="613" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1602935563997">
       <screen x="0" y="0" width="2160" height="1400" />
