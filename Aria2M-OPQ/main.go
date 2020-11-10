@@ -132,7 +132,7 @@ func main() {
 			mess.iotqqType 消息类型 string
 		*/
 		json.Unmarshal([]byte(mess.Content), &fileinfo)
-		log.Println("群聊消息: ", mess.FromNickName+"<"+strconv.FormatInt(mess.FromUserID, 10)+">: "+mess.Content)
+		//log.Println("群聊消息: ", mess.FromNickName+"<"+strconv.FormatInt(mess.FromUserID, 10)+">: "+mess.Content)
 		if strings.HasPrefix(mess.Content, "addurl") {
 			gid, err := Addurl(strings.Trim(mess.Content, "addurl"), aria2)
 			if err != nil {
@@ -173,13 +173,14 @@ func main() {
 			} else {
 				iotqq.Send(mess.FromGroupID, 2, "Successful")
 			}
-			if strings.HasPrefix(mess.Content, "del") {
-				err := Del(strings.TrimPrefix(mess.Content, "del"), aria2)
-				if err != nil {
-					iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
-				} else {
-					iotqq.Send(mess.FromGroupID, 2, "Successful")
-				}
+
+		}
+		if strings.HasPrefix(mess.Content, "del") {
+			err := Del(strings.TrimPrefix(mess.Content, "del"), aria2)
+			if err != nil {
+				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
+			} else {
+				iotqq.Send(mess.FromGroupID, 2, "Successful")
 			}
 		}
 	})
