@@ -26,8 +26,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f4d1930-9c64-4dbf-b38b-b17de896131c" name="默认更改列表" comment="add help">
+      <change afterPath="$PROJECT_DIR$/.idea/Aria2M-OPQ.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/iotqq.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pixivc.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Aria2M-OPQ/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Aria2M-OPQ/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +79,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PicSearch-OPQ" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -141,11 +151,11 @@
     </state>
     <state x="653" y="367" key="EditFileWatcherDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1604843350393" />
     <state x="735" y="476" key="EditFileWatcherDialog/0.0.2160.1400@0.0.2160.1400" timestamp="1602427068723" />
-    <state x="492" y="337" width="424" height="483" key="FileChooserDialogImpl" timestamp="1605769942524">
+    <state x="492" y="337" key="FileChooserDialogImpl" timestamp="1605769796348">
       <screen x="0" y="22" width="1440" height="878" />
     </state>
     <state x="738" y="503" key="FileChooserDialogImpl/0.0.2160.1400@0.0.2160.1400" timestamp="1602935252957" />
-    <state x="492" y="337" width="424" height="483" key="FileChooserDialogImpl/0.22.1440.878@0.22.1440.878" timestamp="1605769942524" />
+    <state x="492" y="337" key="FileChooserDialogImpl/0.22.1440.878@0.22.1440.878" timestamp="1605769796348" />
     <state x="387" y="171" key="SettingsEditor" timestamp="1605769762836">
       <screen x="0" y="22" width="1440" height="878" />
     </state>
