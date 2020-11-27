@@ -186,6 +186,15 @@ func main() {
 		if mess.Content == "help" {
 			iotqq.SendPic(mess.FromGroupID, 2, "", "https://od.liumik.best/sjhl/Picture/help.jpg")
 		}
+		if mess.Content == "swaria2" {
+			var sw struct {
+				Url   string `Url`
+				Token string `Token`
+			}
+			json.Unmarshal([]byte(mess.Content), sw)
+			aria2.Close()
+			aria2 = Connaria2(sw.Url, sw.Token)
+		}
 	})
 	if err != nil {
 		log.Fatal(err)
