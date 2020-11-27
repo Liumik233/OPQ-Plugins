@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1631e9b3-3672-4550-ace2-405ef4c936ef" name="默认更改列表" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Aria2M-OPQ/main.go" afterDir="false" />
-    </list>
+    <list default="true" id="1631e9b3-3672-4550-ace2-405ef4c936ef" name="默认更改列表" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,11 +50,12 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1603765485750" />
-    <state x="656" y="387" key="FileChooserDialogImpl" timestamp="1603766046778">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="492" y="337" key="FileChooserDialogImpl" timestamp="1605769571927">
+      <screen x="0" y="22" width="1440" height="878" />
     </state>
     <state x="656" y="387" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1603766046778" />
     <state x="738" y="502" key="FileChooserDialogImpl/0.0.2160.1400@0.0.2160.1400" timestamp="1602425901180" />
+    <state x="492" y="337" key="FileChooserDialogImpl/0.22.1440.878@0.22.1440.878" timestamp="1605769571927" />
     <state x="461" y="184" width="998" height="710" key="SettingsEditor" timestamp="1603765738118">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
