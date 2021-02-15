@@ -22,8 +22,8 @@ func Exists(path string) bool {
 	return true
 }
 func main() {
-	fmt.Println("BigPic_for_OPQ_ver.0.01a")
-	fmt.Println("作者:Liumik")
+	fmt.Println("Aria2M_for_OPQ_ver.0.1b")
+	fmt.Println("By Liumik")
 	if !Exists("./config.json") {
 		tmp := make(map[string]interface{})
 		var url string
@@ -32,7 +32,7 @@ func main() {
 		var site string
 		fmt.Println("\n请输入OPQ的Web地址: ")
 		fmt.Scan(&site)
-		fmt.Println("\n请输入QQ机器人账号: ")
+		fmt.Println("\n请输入Bot账号: ")
 		fmt.Scan(&qq)
 		fmt.Println("\n请输入url")
 		fmt.Scan(&url)
