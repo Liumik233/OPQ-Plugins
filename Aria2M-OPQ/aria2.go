@@ -22,7 +22,11 @@ func Connaria2(url string, token string) rpc.Client {
 	return rsp
 }
 
-func Addurl(url string, aria2 rpc.Client) (string, error) {
+func Addurl(url1 string, aurl string, token string) (string, error) {
+	aria2 := Connaria2(aurl, token)
+	defer aria2.Close()
+	var url []string
+	url[0] = url1
 	gid, err := aria2.AddURI(url)
 	if err != nil {
 		return gid, err
@@ -31,7 +35,9 @@ func Addurl(url string, aria2 rpc.Client) (string, error) {
 	return gid, nil
 }
 
-func Addbt(url string, aria2 rpc.Client) (string, error) {
+func Addbt(url string, aurl string, token string) (string, error) {
+	aria2 := Connaria2(aurl, token)
+	defer aria2.Close()
 	cmd := exec.Command("wget", url, "-O", "./tmp/tmp.torrent")
 	cmd.Run()
 	gid, err := aria2.AddTorrent("./tmp/tmp.torrent")
@@ -42,7 +48,9 @@ func Addbt(url string, aria2 rpc.Client) (string, error) {
 	return gid, nil
 }
 
-func Filestatus(gid string, aria2 rpc.Client) (string, error) {
+func Filestatus(gid string, aurl string, token string) (string, error) {
+	aria2 := Connaria2(aurl, token)
+	defer aria2.Close()
 	rsp, err := aria2.TellStatus(gid)
 	if err != nil {
 		return "err", err
@@ -55,17 +63,23 @@ func Filestatus(gid string, aria2 rpc.Client) (string, error) {
 	}
 }
 
-func Stop(gid string, aria2 rpc.Client) error {
+func Stop(gid string, aurl string, token string) error {
+	aria2 := Connaria2(aurl, token)
+	defer aria2.Close()
 	_, err := aria2.Pause(gid)
 	return err
 }
 
-func Start(gid string, aria2 rpc.Client) error {
+func Start(gid string, aurl string, token string) error {
+	aria2 := Connaria2(aurl, token)
+	defer aria2.Close()
 	_, err := aria2.Unpause(gid)
 	return err
 }
 
-func Del(gid string, aria2 rpc.Client) error {
+func Del(gid string, aurl string, token string) error {
+	aria2 := Connaria2(aurl, token)
+	defer aria2.Close()
 	_, err := aria2.Remove(gid)
 	return err
 }
