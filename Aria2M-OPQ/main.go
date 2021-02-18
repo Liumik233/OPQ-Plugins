@@ -23,7 +23,7 @@ func Exists(path string) bool {
 	return true
 }
 func main() {
-	fmt.Println("Aria2M_for_OPQ_ver.0.1c")
+	fmt.Println("Aria2M_for_OPQ_ver.0.2a")
 	fmt.Println("By Liumik")
 	if !Exists("./config.json") {
 		tmp := make(map[string]interface{})
@@ -72,6 +72,11 @@ func main() {
 		log.Println(err.Error())
 	}
 	defer opqBot.Stop()
+	ac1 := aria2c{token: &conf1.Token, url: &conf1.Url}
+	err2 := ac1.Connaria2()
+	if err2 != nil {
+		log.Fatalln("aria2 error:", err2)
+	}
 	err = opqBot.AddEvent(OPQBot.EventNameOnGroupMessage, func(botQQ int64, packet OPQBot.GroupMsgPack) {
 		log.Println(botQQ, packet.Content)
 		fileinfo := struct {
@@ -80,15 +85,15 @@ func main() {
 		}{}
 		json.Unmarshal([]byte(packet.Content), &fileinfo)
 		if strings.HasPrefix(packet.Content, "addurl_") {
-			gid, err := Addurl(strings.Trim(packet.Content, "addurl_"), conf1.Url, conf1.Token)
+			gid, err := ac1.Addurl(strings.Trim(packet.Content, "addurl_"))
 			if err != nil {
 				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, "Successful,gid:"+gid)
+				sent2g(&opqBot, packet.FromGroupID, "已添加下载任务，发送status_"+gid+"查看详情")
 			}
 		}
 		if strings.HasPrefix(packet.Content, "status_") {
-			rsp, err := Filestatus(strings.Trim(packet.Content, "status_"), conf1.Url, conf1.Token)
+			rsp, err := ac1.Filestatus(strings.Trim(packet.Content, "status_"))
 			if err != nil {
 				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
@@ -97,7 +102,7 @@ func main() {
 		}
 		if strings.HasPrefix(fileinfo.FileName, "addbt_") {
 			urlt := Getfile(packet.FromGroupID, fileinfo.FileID, strconv.FormatInt(conf1.Qq, 10), conf1.Site)
-			gid, err := Addbt(urlt, conf1.Url, conf1.Token)
+			gid, err := ac1.Addbt(urlt)
 			if err != nil {
 				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
@@ -105,28 +110,28 @@ func main() {
 			}
 		}
 		if strings.HasPrefix(packet.Content, "stop_") {
-			err := Stop(strings.TrimPrefix(packet.Content, "stop_"), conf1.Url, conf1.Token)
+			err := ac1.Stop(strings.TrimPrefix(packet.Content, "stop_"))
 			if err != nil {
 				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, "Successful")
+				sent2g(&opqBot, packet.FromGroupID, "已暂停下载任务")
 			}
 		}
 		if strings.HasPrefix(packet.Content, "start_") {
-			err := Start(strings.TrimPrefix(packet.Content, "start_"), conf1.Url, conf1.Token)
+			err := ac1.Start(strings.TrimPrefix(packet.Content, "start_"))
 			if err != nil {
 				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, "Successful")
+				sent2g(&opqBot, packet.FromGroupID, "已开始下载任务")
 			}
 
 		}
 		if strings.HasPrefix(packet.Content, "del_") {
-			err := Del(strings.TrimPrefix(packet.Content, "del_"), conf1.Url, conf1.Token)
+			err := ac1.Del(strings.TrimPrefix(packet.Content, "del_"))
 			if err != nil {
 				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, "Successful")
+				sent2g(&opqBot, packet.FromGroupID, "已移除下载任务")
 			}
 		}
 	})
