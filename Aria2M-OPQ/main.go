@@ -85,7 +85,7 @@ func main() {
 		}{}
 		json.Unmarshal([]byte(packet.Content), &fileinfo)
 		if strings.HasPrefix(packet.Content, "addurl_") {
-			gid, err := ac1.Addurl(strings.Trim(packet.Content, "addurl_"))
+			gid, err := ac1.Addurl(strings.TrimPrefix(packet.Content, "addurl_"))
 			if err != nil {
 				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
@@ -93,7 +93,7 @@ func main() {
 			}
 		}
 		if strings.HasPrefix(packet.Content, "status_") {
-			rsp, err := ac1.Filestatus(strings.Trim(packet.Content, "status_"))
+			rsp, err := ac1.Filestatus(strings.TrimPrefix(packet.Content, "status_"))
 			if err != nil {
 				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
