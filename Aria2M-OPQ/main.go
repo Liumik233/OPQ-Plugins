@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -22,7 +23,7 @@ func Exists(path string) bool {
 	return true
 }
 func main() {
-	fmt.Println("Aria2M_for_OPQ_ver.0.1b")
+	fmt.Println("Aria2M_for_OPQ_ver.0.1c")
 	fmt.Println("By Liumik")
 	if !Exists("./config.json") {
 		tmp := make(map[string]interface{})
@@ -71,62 +72,70 @@ func main() {
 		log.Println(err.Error())
 	}
 	defer opqBot.Stop()
+	err = opqBot.AddEvent(OPQBot.EventNameOnGroupMessage, func(botQQ int64, packet OPQBot.GroupMsgPack) {
+		log.Println(botQQ, packet.Content)
+		fileinfo := struct {
+			FileID   string `FileID`
+			FileName string `FileName`
+		}{}
+		json.Unmarshal([]byte(packet.Content), &fileinfo)
+		if strings.HasPrefix(packet.Content, "addurl_") {
+			gid, err := Addurl(strings.Trim(packet.Content, "addurl_"), conf1.Url, conf1.Token)
+			if err != nil {
+				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+			} else {
+				sent2g(&opqBot, packet.FromGroupID, "Successful,gid:"+gid)
+			}
+		}
+		if strings.HasPrefix(packet.Content, "status_") {
+			rsp, err := Filestatus(strings.Trim(packet.Content, "status_"), conf1.Url, conf1.Token)
+			if err != nil {
+				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+			} else {
+				sent2g(&opqBot, packet.FromGroupID, rsp)
+			}
+		}
+		if strings.HasPrefix(fileinfo.FileName, "addbt_") {
+			urlt := Getfile(packet.FromGroupID, fileinfo.FileID, strconv.FormatInt(conf1.Qq, 10), conf1.Site)
+			gid, err := Addbt(urlt, conf1.Url, conf1.Token)
+			if err != nil {
+				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+			} else {
+				sent2g(&opqBot, packet.FromGroupID, "Successful,gid:"+gid)
+			}
+		}
+		if strings.HasPrefix(packet.Content, "stop_") {
+			err := Stop(strings.TrimPrefix(packet.Content, "stop_"), conf1.Url, conf1.Token)
+			if err != nil {
+				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+			} else {
+				sent2g(&opqBot, packet.FromGroupID, "Successful")
+			}
+		}
+		if strings.HasPrefix(packet.Content, "start_") {
+			err := Start(strings.TrimPrefix(packet.Content, "start_"), conf1.Url, conf1.Token)
+			if err != nil {
+				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+			} else {
+				sent2g(&opqBot, packet.FromGroupID, "Successful")
+			}
+
+		}
+		if strings.HasPrefix(packet.Content, "del_") {
+			err := Del(strings.TrimPrefix(packet.Content, "del_"), conf1.Url, conf1.Token)
+			if err != nil {
+				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+			} else {
+				sent2g(&opqBot, packet.FromGroupID, "Successful")
+			}
+		}
+	})
 	err = opqBot.AddEvent(OPQBot.EventNameOnFriendMessage, func(botQQ int64, packet OPQBot.FriendMsgPack) {
+		log.Println(botQQ, packet.Content)
 	})
 
 	err = opqBot.AddEvent(OPQBot.EventNameOnGroupShut, func(botQQ int64, packet OPQBot.GroupShutPack) {
-		//log.Println(botQQ, packet)
-		//log.Println("群聊消息: ", mess.FromNickName+"<"+strconv.FormatInt(mess.FromUserID, 10)+">: "+mess.Content)
-		if strings.HasPrefix(packet.EventMsg.Content, "addurl") {
-			gid, err := Addurl(strings.Trim(packet.EventMsg.Content, "addurl"), conf1.Url, conf1.Token)
-			if err != nil {
-				sent2g(&opqBot, packet.EventData.GroupID, "error:"+err.Error())
-			} else {
-				sent2g(&opqBot, packet.EventData.GroupID, "Successful,gid:"+gid)
-			}
-		}
-		if strings.HasPrefix(packet.EventMsg.Content, "status") {
-			rsp, err := Filestatus(strings.Trim(packet.EventMsg.Content, "status"), conf1.Url, conf1.Token)
-			if err != nil {
-				sent2g(&opqBot, packet.EventData.GroupID, "error:"+err.Error())
-			} else {
-				sent2g(&opqBot, packet.EventData.GroupID, rsp)
-			}
-		}
-		/*if strings.HasPrefix(fileinfo.FileName, "addbt") {
-			urlt := iotqq.Getfile(mess.FromGroupID, fileinfo.FileID)
-			gid, err := Addbt(urlt, aria2)
-			if err != nil {
-				iotqq.Send(mess.FromGroupID, 2, "error:"+err.Error())
-			} else {
-				iotqq.Send(mess.FromGroupID, 2, "Successful,gid:"+gid)
-			}
-		}*/
-		if strings.HasPrefix(packet.EventMsg.Content, "stop") {
-			err := Stop(strings.TrimPrefix(packet.EventMsg.Content, "stop"), conf1.Url, conf1.Token)
-			if err != nil {
-				sent2g(&opqBot, packet.EventData.GroupID, "error:"+err.Error())
-			} else {
-				sent2g(&opqBot, packet.EventData.GroupID, "Successful")
-			}
-		}
-		if strings.HasPrefix(packet.EventMsg.Content, "start") {
-			err := Start(strings.TrimPrefix(packet.EventMsg.Content, "start"), conf1.Url, conf1.Token)
-			if err != nil {
-				sent2g(&opqBot, packet.EventData.GroupID, "error:"+err.Error())
-			} else {
-				sent2g(&opqBot, packet.EventData.GroupID, "Successful")
-			}
-
-		}
-		if strings.HasPrefix(packet.EventMsg.Content, "del") {
-			err := Del(strings.TrimPrefix(packet.EventMsg.Content, "del"), conf1.Url, conf1.Token)
-			if err != nil {
-				sent2g(&opqBot, packet.EventData.GroupID, "error:"+err.Error())
-			} else {
-				sent2g(&opqBot, packet.EventData.GroupID, "Successful")
-			}
-		}
+		log.Println(botQQ, packet)
 	})
 	if err != nil {
 		log.Println(err.Error())

@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1631e9b3-3672-4550-ace2-405ef4c936ef" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/Aria2M-OPQ/opqbot.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GenCal-OPQ/main.go" afterDir="false" />
+    <list default="true" id="1631e9b3-3672-4550-ace2-405ef4c936ef" name="默认更改列表" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/.idea/Aria2M-OPQ.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/.idea/watcherTasks.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/go.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/go.sum" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Aria2M-OPQ/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/model/iotqq.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,5 +81,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>

@@ -25,7 +25,7 @@ func sent2g(m *OPQBot.BotManager, uid int64, content string) {
 		SendType:   OPQBot.SendTypeTextMsg,
 	})
 }
-func Getfile(groupid int, fileid string, qq string, url1 string) string {
+func Getfile(groupid int64, fileid string, qq string, url1 string) string {
 	url := struct {
 		Url string `Url`
 	}{}

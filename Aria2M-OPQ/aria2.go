@@ -6,26 +6,33 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strings"
 	"time"
 )
+
+/*
+type aria2c struct {
+	url *string
+	token *string
+}*/
 
 func Connaria2(url string, token string) rpc.Client {
 	ctx := context.Background()
 	var no rpc.Notifier
-	rsp, err := rpc.New(ctx, url, token, time.Second*30, no)
+	rsp, err := rpc.New(ctx, url, token, time.Second*5, no)
 	if err != nil {
 		log.Println("err:", err)
 		os.Exit(1)
 	}
-	ver, err := rsp.GetVersion()
-	log.Println("connect successful,ver:", ver.Version)
+	//ver, err := rsp.GetVersion()
+	//log.Println("connect successful,ver:", ver.Version)
 	return rsp
 }
 
 func Addurl(url1 string, aurl string, token string) (string, error) {
 	aria2 := Connaria2(aurl, token)
 	defer aria2.Close()
-	var url []string
+	url := make([]string, 1)
 	url[0] = url1
 	gid, err := aria2.AddURI(url)
 	if err != nil {
@@ -56,10 +63,11 @@ func Filestatus(gid string, aurl string, token string) (string, error) {
 		return "err", err
 		log.Println(err)
 	}
+
 	if rsp.Status == "active" {
-		return "状态：" + rsp.Status + "\n下载速度：" + rsp.DownloadSpeed + "\n下载进度：" + rsp.CompletedLength + "/" + rsp.TotalLength, err
+		return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + rsp.DownloadSpeed + "\n下载进度：" + rsp.CompletedLength + "/" + rsp.TotalLength, err
 	} else {
-		return "状态：" + rsp.Status, err
+		return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status, err
 	}
 }
 
