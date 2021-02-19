@@ -31,26 +31,16 @@ func (a *aria2c) Connaria2() error {
 }
 func (a *aria2c) ondown(gid string, groupid int64, userid int64, opqbot *OPQBot.BotManager) {
 	for true {
-		rsp, err := a.a.TellStatus(gid, "Status")
+		rsp, err := a.a.TellStatus(gid)
 		if err != nil {
 			log.Println("ondown err:", err)
 			break
 		}
 		if rsp.Status == "complete" {
-			rsp, err := a.a.TellStatus(gid, "Files", "Dir", "Status")
-			if err != nil {
-				log.Println("ondown err2:", err)
-				break
-			}
 			send2p(opqbot, userid, groupid, "下载任务完成！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请访问https://reurl.cc/pmLl0lh获取文件")
 			break
 		} else if rsp.Status != "active" {
 			if rsp.Status == "error" {
-				rsp, err := a.a.TellStatus(gid, "Files", "Dir", "Status", "ErrorMessage")
-				if err != nil {
-					log.Println("ondown err2:", err)
-					break
-				}
 				send2p(opqbot, userid, groupid, "下载任务完成！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid："+gid+"\nErrMsg："+rsp.ErrorMessage)
 			}
 			break
@@ -81,7 +71,7 @@ func (a *aria2c) Addbt(url string) (string, error) {
 }
 
 func (a *aria2c) Filestatus(gid string) (string, error) {
-	rsp, err := a.a.TellStatus(gid, "DownloadSpeed", "TotalLength", "CompletedLength", "Files", "Dir", "Status")
+	rsp, err := a.a.TellStatus(gid)
 	if err != nil {
 		return "err", err
 		log.Println(err)
