@@ -37,11 +37,11 @@ func (a *aria2c) ondown(gid string, groupid int64, userid int64, opqbot *OPQBot.
 			break
 		}
 		if rsp.Status == "complete" {
-			send2g(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请访问https://reurl.cc/pmLl0l获取文件")
+			send2g(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+strings.TrimPrefix(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请访问https://reurl.cc/pmLl0l获取文件")
 			break
 		} else if rsp.Status != "active" {
 			if rsp.Status == "error" {
-				send2g(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务失败！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid："+gid+"\nErrMsg："+rsp.ErrorMessage)
+				send2g(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务失败！\n文件名："+strings.TrimPrefix(rsp.Files[0].Path, rsp.Dir)+"\nGid："+gid+"\nErrMsg："+rsp.ErrorMessage)
 			}
 			break
 		}
@@ -80,7 +80,7 @@ func (a *aria2c) Filestatus(gid string) (string, error) {
 	toi, err := strconv.ParseFloat(rsp.TotalLength, 64)
 	cpi, err := strconv.ParseFloat(rsp.CompletedLength, 64)
 	if rsp.Status == "active" {
-		return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
+		return "文件名：" + strings.TrimPrefix(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
 	} else {
 		return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status, err
 	}
