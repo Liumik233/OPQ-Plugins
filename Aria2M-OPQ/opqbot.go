@@ -22,7 +22,7 @@ func send2p(m *OPQBot.BotManager, uid int64, gid int64, content string) {
 		ToUserUid:  uid,
 		Content:    OPQBot.SendTypeTextMsgContentPrivateChat{Content: content, Group: gid},
 		SendToType: OPQBot.SendToTypePrivateChat,
-		SendType:   OPQBot.SendToTypePrivateChat,
+		SendType:   OPQBot.SendTypeTextMsg,
 	}) //发送群私聊消息
 }
 func send2g(m *OPQBot.BotManager, uid int64, content string) {
