@@ -177,5 +177,7 @@ func main() {
 	if err != nil {
 		log.Println(err.Error())
 	}
-	time.Sleep(1 * time.Hour)
+	for true {
+		time.Sleep(1 * time.Hour)
+	}
 }
