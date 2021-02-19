@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/mcoo/OPQBot"
 	"github.com/zyxar/argo/rpc"
 	"log"
 	"os"
@@ -22,14 +23,41 @@ func (a *aria2c) Connaria2() error {
 	rsp, err := rpc.New(ctx, *a.url, *a.token, time.Second*5, no)
 	if err != nil {
 		return err
-		os.Exit(1)
 	}
 	a.a = rsp
 	ver, err := rsp.GetVersion()
 	log.Println("connect successful,ver:", ver.Version)
 	return nil
 }
-
+func (a *aria2c) ondown(gid string, groupid int64, userid int64, opqbot *OPQBot.BotManager) {
+	for true {
+		rsp, err := a.a.TellStatus(gid, "Status")
+		if err != nil {
+			log.Println("ondown err:", err)
+			break
+		}
+		if rsp.Status == "complete" {
+			rsp, err := a.a.TellStatus(gid, "Files", "Dir", "Status")
+			if err != nil {
+				log.Println("ondown err2:", err)
+				break
+			}
+			send2p(opqbot, userid, groupid, "下载任务完成！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请访问https://reurl.cc/pmLl0lh获取文件")
+			break
+		} else if rsp.Status != "active" {
+			if rsp.Status == "error" {
+				rsp, err := a.a.TellStatus(gid, "Files", "Dir", "Status", "ErrorMessage")
+				if err != nil {
+					log.Println("ondown err2:", err)
+					break
+				}
+				send2p(opqbot, userid, groupid, "下载任务完成！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid："+gid+"\nErrMsg："+rsp.ErrorMessage)
+			}
+			break
+		}
+		time.Sleep(20 * time.Second)
+	}
+}
 func (a *aria2c) Addurl(url1 string) (string, error) {
 	url := make([]string, 1)
 	url[0] = url1
@@ -53,7 +81,7 @@ func (a *aria2c) Addbt(url string) (string, error) {
 }
 
 func (a *aria2c) Filestatus(gid string) (string, error) {
-	rsp, err := a.a.TellStatus(gid)
+	rsp, err := a.a.TellStatus(gid, "DownloadSpeed", "TotalLength", "CompletedLength", "Files", "Dir", "Status")
 	if err != nil {
 		return "err", err
 		log.Println(err)
@@ -61,7 +89,6 @@ func (a *aria2c) Filestatus(gid string) (string, error) {
 	spi, err := strconv.ParseInt(rsp.DownloadSpeed, 10, 64)
 	toi, err := strconv.ParseFloat(rsp.TotalLength, 64)
 	cpi, err := strconv.ParseFloat(rsp.CompletedLength, 64)
-
 	if rsp.Status == "active" {
 		return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
 	} else {

@@ -12,6 +12,7 @@ import (
 	"time"
 )
 
+var limi int //下载任务限制
 func Exists(path string) bool {
 	_, err := os.Stat(path) //os.Stat获取文件信息
 	if err != nil {
@@ -23,6 +24,7 @@ func Exists(path string) bool {
 	return true
 }
 func main() {
+	limi = 0
 	fmt.Println("Aria2M_for_OPQ_ver.0.2a")
 	fmt.Println("By Liumik")
 	if !Exists("./config.json") {
@@ -78,60 +80,72 @@ func main() {
 		log.Fatalln("aria2 error:", err2)
 	}
 	err = opqBot.AddEvent(OPQBot.EventNameOnGroupMessage, func(botQQ int64, packet OPQBot.GroupMsgPack) {
-		log.Println(botQQ, packet.Content)
+		//log.Println(botQQ, packet.Content)
 		fileinfo := struct {
 			FileID   string `FileID`
 			FileName string `FileName`
 		}{}
 		json.Unmarshal([]byte(packet.Content), &fileinfo)
 		if strings.HasPrefix(packet.Content, "addurl_") {
-			gid, err := ac1.Addurl(strings.TrimPrefix(packet.Content, "addurl_"))
-			if err != nil {
-				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+			if limi <= 5 {
+				gid, err := ac1.Addurl(strings.TrimPrefix(packet.Content, "addurl_"))
+				if err != nil {
+					send2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+				} else {
+					send2g(&opqBot, packet.FromGroupID, "已添加下载任务，发送status_"+gid+"查看详情")
+					limi += 1
+					go ac1.ondown(gid, packet.FromGroupID, packet.FromUserID, &opqBot)
+				}
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, "已添加下载任务，发送status_"+gid+"查看详情")
+				send2g(&opqBot, packet.FromGroupID, "下载任务过多，请等待任务完成")
 			}
 		}
 		if strings.HasPrefix(packet.Content, "status_") {
 			rsp, err := ac1.Filestatus(strings.TrimPrefix(packet.Content, "status_"))
 			if err != nil {
-				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+				send2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, rsp)
+				send2g(&opqBot, packet.FromGroupID, rsp)
 			}
 		}
 		if strings.HasPrefix(fileinfo.FileName, "addbt_") {
-			urlt := Getfile(packet.FromGroupID, fileinfo.FileID, strconv.FormatInt(conf1.Qq, 10), conf1.Site)
-			gid, err := ac1.Addbt(urlt)
-			if err != nil {
-				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+			if limi <= 5 {
+				urlt := Getfile(packet.FromGroupID, fileinfo.FileID, strconv.FormatInt(conf1.Qq, 10), conf1.Site)
+				gid, err := ac1.Addbt(urlt)
+				if err != nil {
+					send2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+				} else {
+					send2g(&opqBot, packet.FromGroupID, "已添加下载任务，发送status_"+gid+"查看详情")
+					limi += 1
+					go ac1.ondown(gid, packet.FromGroupID, packet.FromUserID, &opqBot)
+				}
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, "Successful,gid:"+gid)
+				send2g(&opqBot, packet.FromGroupID, "下载任务过多，请等待任务完成")
 			}
 		}
 		if strings.HasPrefix(packet.Content, "stop_") {
 			err := ac1.Stop(strings.TrimPrefix(packet.Content, "stop_"))
 			if err != nil {
-				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+				send2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, "已暂停下载任务")
+				send2g(&opqBot, packet.FromGroupID, "已暂停下载任务")
 			}
 		}
 		if strings.HasPrefix(packet.Content, "start_") {
 			err := ac1.Start(strings.TrimPrefix(packet.Content, "start_"))
 			if err != nil {
-				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+				send2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, "已开始下载任务")
+				send2g(&opqBot, packet.FromGroupID, "已开始下载任务")
 			}
 
 		}
 		if strings.HasPrefix(packet.Content, "del_") {
 			err := ac1.Del(strings.TrimPrefix(packet.Content, "del_"))
 			if err != nil {
-				sent2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
+				send2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 			} else {
-				sent2g(&opqBot, packet.FromGroupID, "已移除下载任务")
+				send2g(&opqBot, packet.FromGroupID, "已移除下载任务")
 			}
 		}
 	})
