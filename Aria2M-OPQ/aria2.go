@@ -47,6 +47,7 @@ func (a *aria2c) ondown(gid string, groupid int64, userid int64, opqbot *OPQBot.
 		}
 		time.Sleep(20 * time.Second)
 	}
+	limi -= 1
 }
 func (a *aria2c) Addurl(url1 string) (string, error) {
 	url := make([]string, 1)
