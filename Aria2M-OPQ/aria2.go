@@ -37,7 +37,7 @@ func (a *aria2c) ondown(gid string, groupid int64, userid int64, opqbot *OPQBot.
 			break
 		}
 		if rsp.Status == "complete" {
-			send2g(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请访问https://reurl.cc/pmLl0lh获取文件")
+			send2g(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请访问https://reurl.cc/pmLl0l获取文件")
 			break
 		} else if rsp.Status != "active" {
 			if rsp.Status == "error" {
