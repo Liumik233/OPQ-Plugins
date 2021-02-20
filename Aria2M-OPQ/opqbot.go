@@ -33,6 +33,14 @@ func send2g(m *OPQBot.BotManager, uid int64, content string) {
 		SendType:   OPQBot.SendTypeTextMsg,
 	}) //发送群消息
 }
+func send2gp(m *OPQBot.BotManager, uid int64, content string, picurl string) {
+	m.Send(OPQBot.SendMsgPack{
+		ToUserUid:  uid,
+		Content:    OPQBot.SendTypePicMsgByUrlContent{Content: content, PicUrl: picurl},
+		SendToType: OPQBot.SendToTypeGroup,
+		SendType:   OPQBot.SendTypePicMsgByUrl,
+	}) //发送群消息
+}
 func Getfile(groupid int64, fileid string, qq string, url1 string) string {
 	url := struct {
 		Url string `Url`
