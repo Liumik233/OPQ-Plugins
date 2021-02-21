@@ -37,10 +37,14 @@ func (a *aria2c) ondown(gid string, groupid int64, userid int64, opqbot *OPQBot.
 			break
 		}
 		if rsp.Status == "complete" {
-			if rsp.InfoHash != "" {
+			if rsp.BitTorrent.Info.Name != "" {
 				send2gp(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+rsp.BitTorrent.Info.Name+"\nGid:"+gid+"\n请扫码获取文件[PICFLAG]", "https://ftp.bmp.ovh/imgs/2021/02/3a92ba2af528d085.png")
 			} else {
-				send2gp(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+strings.TrimPrefix(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请扫码获取文件[PICFLAG]", "https://ftp.bmp.ovh/imgs/2021/02/3a92ba2af528d085.png")
+				if rsp.InfoHash != "" {
+					a.ondown(gid, groupid, userid, opqbot)
+				} else {
+					send2gp(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+strings.TrimPrefix(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请扫码获取文件[PICFLAG]", "https://ftp.bmp.ovh/imgs/2021/02/3a92ba2af528d085.png")
+				}
 			}
 			break
 		} else if rsp.Status != "active" {
@@ -86,7 +90,7 @@ func (a *aria2c) Filestatus(gid string) (string, error) {
 	cpi, err := strconv.ParseFloat(rsp.CompletedLength, 64)
 	if rsp.Status == "active" {
 		return "文件名：" + strings.TrimPrefix(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
-	} else if rsp.InfoHash != "" {
+	} else if rsp.BitTorrent.Info.Name != "" {
 		return "文件名：" + rsp.BitTorrent.Info.Name + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
 	} else {
 		return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status, err
