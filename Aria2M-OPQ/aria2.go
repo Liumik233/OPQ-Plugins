@@ -37,10 +37,14 @@ func (a *aria2c) ondown(gid string, groupid int64, userid int64, opqbot *OPQBot.
 			break
 		}
 		if rsp.Status == "complete" {
-			if rsp.InfoHash != "" {
+			if rsp.BitTorrent.Info.Name != "" {
 				send2gp(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+rsp.BitTorrent.Info.Name+"\nGid:"+gid+"\n请扫码获取文件[PICFLAG]", "https://ftp.bmp.ovh/imgs/2021/02/3a92ba2af528d085.png")
 			} else {
-				send2gp(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请扫码获取文件[PICFLAG]", "https://ftp.bmp.ovh/imgs/2021/02/3a92ba2af528d085.png")
+				if rsp.FollowedBy[0] != "" {
+					a.ondown(rsp.FollowedBy[0], groupid, userid, opqbot)
+				} else {
+					send2gp(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+strings.Trim(rsp.Files[0].Path, rsp.Dir)+"\nGid:"+gid+"\n请扫码获取文件[PICFLAG]", "https://ftp.bmp.ovh/imgs/2021/02/3a92ba2af528d085.png")
+				}
 			}
 			break
 		} else if rsp.Status != "active" {
@@ -84,10 +88,19 @@ func (a *aria2c) Filestatus(gid string) (string, error) {
 	spi, err := strconv.ParseInt(rsp.DownloadSpeed, 10, 64)
 	toi, err := strconv.ParseFloat(rsp.TotalLength, 64)
 	cpi, err := strconv.ParseFloat(rsp.CompletedLength, 64)
-	if rsp.InfoHash != "" {
+	if rsp.BitTorrent.Info.Name != "" {
 		return "文件名：" + rsp.BitTorrent.Info.Name + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
 	} else {
-		return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
+		if rsp.FollowedBy[0] != "" {
+			rsp, err = a.a.TellStatus(gid)
+			if err != nil {
+				return "err", err
+				log.Println(err)
+			}
+			return "文件名：" + rsp.BitTorrent.Info.Name + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
+		} else {
+			return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
+		}
 	}
 }
 
