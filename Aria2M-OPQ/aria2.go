@@ -12,6 +12,14 @@ import (
 	"time"
 )
 
+func pr(a int) string {
+	var pr string
+	for i := 0; i < a; i++ {
+		pr += "█"
+	}
+	return pr
+}
+
 type aria2c struct {
 	url, token *string
 	a          rpc.Client
@@ -92,8 +100,9 @@ func (a *aria2c) Filestatus(gid string) (string, error) {
 	spi, err := strconv.ParseInt(rsp.DownloadSpeed, 10, 64)
 	toi, err := strconv.ParseFloat(rsp.TotalLength, 64)
 	cpi, err := strconv.ParseFloat(rsp.CompletedLength, 64)
+	i := cpi / toi * 10
 	if rsp.BitTorrent.Info.Name != "" {
-		return "文件名：" + rsp.BitTorrent.Info.Name + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
+		return "文件名：" + rsp.BitTorrent.Info.Name + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(i*10), 10) + "%\n" + pr(int(i)), err
 	} else {
 		if len(rsp.FollowedBy) == 1 {
 			rsp, err = a.a.TellStatus(rsp.FollowedBy[0])
@@ -101,9 +110,9 @@ func (a *aria2c) Filestatus(gid string) (string, error) {
 				return "err", err
 				log.Println(err)
 			}
-			return "文件名：" + rsp.BitTorrent.Info.Name + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
+			return "文件名：" + rsp.BitTorrent.Info.Name + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%\n" + pr(int(i)), err
 		} else {
-			return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%", err
+			return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.FormatInt(int64(cpi/toi*100), 10) + "%\n" + pr(int(i)), err
 		}
 	}
 }
