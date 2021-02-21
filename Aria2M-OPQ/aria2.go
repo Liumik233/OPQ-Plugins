@@ -104,12 +104,7 @@ func (a *aria2c) Filestatus(gid string) (string, error) {
 		return "文件名：" + rsp.BitTorrent.Info.Name + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.Itoa(int(cpi/toi*100)) + "%\n" + rsp.CompletedLength + "/" + rsp.TotalLength, err
 	} else {
 		if len(rsp.FollowedBy) == 1 {
-			rsp, err = a.a.TellStatus(rsp.FollowedBy[0])
-			if err != nil {
-				return "err", err
-				log.Println(err)
-			}
-			return "文件名：" + rsp.BitTorrent.Info.Name + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.Itoa(int(cpi/toi*100)) + "%\n" + rsp.CompletedLength + "/" + rsp.TotalLength, err
+			return a.Filestatus(rsp.FollowedBy[0])
 		} else {
 			return "文件名：" + strings.Trim(rsp.Files[0].Path, rsp.Dir) + "\n下载状态：" + rsp.Status + "\n下载速度：" + strconv.FormatInt(spi/1024, 10) + "KB/s\n下载进度：" + strconv.Itoa(int(cpi/toi*100)) + "%\n" + rsp.CompletedLength + "/" + rsp.TotalLength, err
 		}
