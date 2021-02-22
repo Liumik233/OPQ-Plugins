@@ -1,8 +1,6 @@
 package main
 
 import (
-	"../aria2"
-	"../opqbot"
 	"encoding/json"
 	"fmt"
 	"github.com/mcoo/OPQBot"

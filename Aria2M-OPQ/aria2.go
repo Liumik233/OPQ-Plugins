@@ -1,7 +1,6 @@
 package main
 
 import (
-	"../opqbot"
 	"context"
 	"github.com/mcoo/OPQBot"
 	"github.com/zyxar/argo/rpc"
@@ -47,7 +46,7 @@ func (a *aria2c) ondown(gid string, groupid int64, userid int64, opqbot *OPQBot.
 		}
 		if rsp.Status == "complete" {
 			if rsp.BitTorrent.Info.Name != "" {
-				opqbot.send2gp(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+rsp.BitTorrent.Info.Name+"\nGid:"+gid+"\n请扫码获取文件[PICFLAG]", "https://ftp.bmp.ovh/imgs/2021/02/3a92ba2af528d085.png")
+				send2gp(opqbot, groupid, "[ATUSER("+strconv.FormatInt(userid, 10)+")]\n下载任务完成！\n文件名："+rsp.BitTorrent.Info.Name+"\nGid:"+gid+"\n请扫码获取文件[PICFLAG]", "https://ftp.bmp.ovh/imgs/2021/02/3a92ba2af528d085.png")
 			} else {
 				if len(rsp.FollowedBy) == 1 {
 					rsp, err = a.a.TellStatus(rsp.FollowedBy[0])
