@@ -3,126 +3,113 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"iotqq/model"
+	"github.com/mcoo/OPQBot"
+	"io/ioutil"
 	"log"
-	"runtime"
-	"strconv"
+	"os"
 	"strings"
 	"time"
-
-	"github.com/graarh/golang-socketio"
-	"github.com/graarh/golang-socketio/transport"
 )
 
-var BotUrl, qq string
-var conf iotqq.Conf
-var zanok, qd []int64
-
-
-func periodlycall(d time.Duration, f func()) {
-	for x := range time.Tick(d) {
-		f()
-		log.Println(x)
-	}
-}
-func resetzan() {
-
-	m1 := len(zanok)
-	for m := 0; m < m1; m++ {
-		i := 0
-		zanok = append(zanok[:i], zanok[i+1:]...)
-	}
-	m2 := len(qd)
-	for m := 0; m < m2; m++ {
-		i := 0
-		qd = append(qd[:i], qd[i+1:]...)
-	}
-}
-func SendJoin(c *gosocketio.Client) {
-	log.Println("获取QQ号连接")
-	result, err := c.Ack("GetWebConn", qq, time.Second*5)
+func Exists(path string) bool {
+	_, err := os.Stat(path) //os.Stat获取文件信息
 	if err != nil {
-		log.Fatal(err)
-	} else {
-		log.Println("emit", result)
+		if os.IsExist(err) {
+			return true
+		}
+		return false
 	}
+	return true
 }
 func main() {
-	type pic struct {
-		Url string `json:"Url"`
-	}
-	type json1 struct {
-		Content string `jspn:Content`
-		GroupPic []pic `json:"GroupPic"`
-	}
-	var pic1 json1
-	var site string
-	var port int
-	var apikey string
-	port = 8888
-	fmt.Println("BigPic_for_OPQ_ver.0.01a")
-	fmt.Println("作者:Liumik")
-	fmt.Println("\n请输入OPQ的Web地址(无需http://和端口): ")
-	fmt.Scan(&site)
-	fmt.Println("\n请输入OPQ的端口号: ")
-	fmt.Scan(&port)
-	fmt.Println("\n请输入QQ机器人账号: ")
-	fmt.Scan(&qq)
-	fmt.Println("\n请输入api-key")
-	fmt.Scan(&apikey)
-	runtime.GOMAXPROCS(runtime.NumCPU())
-	BotUrl = site + ":" + strconv.Itoa(port)
-	iotqq.Set(BotUrl, qq)
-	c, err := gosocketio.Dial(
-		gosocketio.GetUrl(site, port, false),
-		transport.GetDefaultWebsocketTransport())
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = c.On("OnGroupMsgs", func(h *gosocketio.Channel, args iotqq.Message) {
-		var mess iotqq.Data = args.CurrentPacket.Data
-		/*
-			mess.Content 消息内容 string
-			mess.FromGroupID 来源QQ群 int
-			mess.FromUserID 来源QQ int64
-			mess.iotqqType 消息类型 string
-		*/
-		log.Println("群聊消息: ", mess.FromNickName+"<"+strconv.FormatInt(mess.FromUserID, 10)+">: "+mess.Content)
-		json.Unmarshal([]byte(mess.Content),&pic1)
-		if strings.HasPrefix(pic1.Content, "bigpic"){
-			iotqq.SendPic(mess.FromGroupID,2,"放大成功",post1(pic1.GroupPic[0].Url,apikey))
+	fmt.Println("Aria2M_for_OPQ_ver.0.2a")
+	fmt.Println("By Liumik")
+	if !Exists("./config.json") {
+		tmp := make(map[string]interface{})
+		var apikey string
+		var qq int64
+		var site string
+		fmt.Println("\n请输入OPQ的Web地址: ")
+		fmt.Scan(&site)
+		fmt.Println("\n请输入Bot账号: ")
+		fmt.Scan(&qq)
+		fmt.Println("\n请输入url")
+		fmt.Scan(&apikey)
+		tmp["Site"] = site
+		tmp["Qq"] = qq
+		tmp["Apikey"] = apikey
+		tmp1, _ := json.Marshal(tmp)
+		c1, err := os.Create("config.json")
+		defer c1.Close()
+		if err != nil {
+			log.Println("cerr:", err)
+			os.Exit(1)
 		}
+		c1.Write(tmp1)
+	}
+	c1, err := os.OpenFile("./config.json", os.O_RDONLY, 0600)
+	defer c1.Close()
+	if err != nil {
+		log.Println("openerr:", err)
+		os.Exit(1)
+	}
+	cb, _ := ioutil.ReadAll(c1)
+	conf1 := struct {
+		Site   string `Site`
+		Qq     int64  `Qq`
+		Apikey string `Apikey`
+	}{}
+	json.Unmarshal(cb, &conf1)
+	opqBot := OPQBot.NewBotManager(conf1.Qq, conf1.Site)
+	err1 := opqBot.Start()
+	if err1 != nil {
+		log.Println(err.Error())
+	}
+	defer opqBot.Stop()
+	err = opqBot.AddEvent(OPQBot.EventNameOnGroupMessage, func(botQQ int64, packet OPQBot.GroupMsgPack) {
+		//log.Println(botQQ, packet.Content)
+		type pict struct {
+			Url string `json:"Url"`
+		}
+		type pic struct {
+			Content  string `json:"Content"`
+			GroupPic []pict `json:"GroupPic"`
+		}
+		pic1 := pic{}
+		json.Unmarshal([]byte(packet.Content), &pic1)
+		if strings.HasPrefix(pic1.Content, "bigpic") {
+			send2gp(&opqBot, packet.FromGroupID, "放大成功[PICFLAG]", post1(pic1.GroupPic[0].Url, conf1.Apikey))
+		}
+	})
+	err = opqBot.AddEvent(OPQBot.EventNameOnFriendMessage, func(botQQ int64, packet OPQBot.FriendMsgPack) {
+		log.Println(botQQ, packet.Content)
+	})
 
+	err = opqBot.AddEvent(OPQBot.EventNameOnGroupShut, func(botQQ int64, packet OPQBot.GroupShutPack) {
+		log.Println(botQQ, packet)
 	})
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err.Error())
 	}
-	err = c.On("OnFriendMsgs", func(h *gosocketio.Channel, args iotqq.Message) {
-		log.Println("私聊消息: ", args.CurrentPacket.Data.Content)
-
+	err = opqBot.AddEvent(OPQBot.EventNameOnConnected, func() {
+		log.Println("连接成功！！！")
 	})
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err.Error())
 	}
-	err = c.On(gosocketio.OnDisconnection, func(h *gosocketio.Channel) {
-		log.Fatal("Disconnected")
+	err = opqBot.AddEvent(OPQBot.EventNameOnDisconnected, func() {
+		log.Println("连接断开！！")
 	})
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err.Error())
 	}
-	err = c.On(gosocketio.OnConnection, func(h *gosocketio.Channel) {
-		log.Println("连接成功")
+	err = opqBot.AddEvent(OPQBot.EventNameOnOther, func(botQQ int64, e interface{}) {
+		log.Println(e)
 	})
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err.Error())
 	}
-	time.Sleep(1 * time.Second)
-	go SendJoin(c)
-	periodlycall(24*time.Hour, resetzan)
-home:
-	time.Sleep(600 * time.Second)
-	SendJoin(c)
-	goto home
-	log.Println(" [x] Complete")
+	for true {
+		time.Sleep(1 * time.Hour)
+	}
 }

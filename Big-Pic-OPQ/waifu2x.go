@@ -51,8 +51,8 @@ func post2(file string, key string) (string, int) {
 		// handle error
 	}
 	req.Header.Add("api-key", key)
-	req.Header.Add("Content-Type", contentType)                       //指定Content-type
-	resp, _ := client.Do(req)                                         //发送post请求
+	req.Header.Add("Content-Type", contentType) //指定Content-type
+	resp, _ := client.Do(req)                   //发送post请求
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body) //读取body
 	json.Unmarshal(body, &rejson1)       //json to struct

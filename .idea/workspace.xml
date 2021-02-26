@@ -2,8 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1631e9b3-3672-4550-ace2-405ef4c936ef" name="默认更改列表" comment="update">
+      <change afterPath="$PROJECT_DIR$/Big-Pic-OPQ/opqbot.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Aria2M-OPQ/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Big-Pic-OPQ/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Big-Pic-OPQ/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Big-Pic-OPQ/model/iotqq.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Big-Pic-OPQ/waifu2x.go" beforeDir="false" afterPath="$PROJECT_DIR$/Big-Pic-OPQ/waifu2x.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GenCal-OPQ/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/.idea/Aria2M-OPQ.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/.idea/watcherTasks.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/go.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/model/iotqq.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PicSearch-OPQ/pixivc.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,11 +57,12 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Aria2M-OPQ" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Big-Pic-OPQ" />
     <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Big-Pic-OPQ" />
       <recent name="$PROJECT_DIR$/Genshin-OPQ" />
     </key>
   </component>
