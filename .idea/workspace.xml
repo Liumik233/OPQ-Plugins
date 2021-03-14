@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1631e9b3-3672-4550-ace2-405ef4c936ef" name="默认更改列表" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1631e9b3-3672-4550-ace2-405ef4c936ef" name="默认更改列表" comment="fix bus">
       <change beforePath="$PROJECT_DIR$/Aria2M-OPQ/aria2.go" beforeDir="false" afterPath="$PROJECT_DIR$/Aria2M-OPQ/aria2.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,6 +84,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="fix bus" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bus" />
   </component>
 </project>
