@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-var limi int //下载任务限制
+var limit int //下载任务限制
 func Exists(path string) bool {
 	_, err := os.Stat(path) //os.Stat获取文件信息
 	if err != nil {
@@ -24,7 +24,7 @@ func Exists(path string) bool {
 	return true
 }
 func main() {
-	limi = 0
+	limit = 0
 	fmt.Println("Aria2M_for_OPQ_ver.0.2a")
 	fmt.Println("By Liumik")
 	if !Exists("./config.json") {
@@ -87,13 +87,13 @@ func main() {
 		}{}
 		json.Unmarshal([]byte(packet.Content), &fileinfo)
 		if strings.HasPrefix(packet.Content, "addurl_") {
-			if limi <= 5 {
+			if limit <= 5 {
 				gid, err := ac1.Addurl(strings.TrimPrefix(packet.Content, "addurl_"))
 				if err != nil {
 					send2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 				} else {
 					send2g(&opqBot, packet.FromGroupID, "已添加下载任务，发送status_"+gid+"查看详情")
-					limi += 1
+					limit += 1
 					go ac1.ondown(gid, packet.FromGroupID, packet.FromUserID, &opqBot)
 				}
 			} else {
@@ -109,14 +109,14 @@ func main() {
 			}
 		}
 		if strings.HasPrefix(fileinfo.FileName, "addbt_") {
-			if limi <= 5 {
+			if limit <= 5 {
 				urlt := Getfile(packet.FromGroupID, fileinfo.FileID, strconv.FormatInt(conf1.Qq, 10), conf1.Site)
 				gid, err := ac1.Addbt(urlt)
 				if err != nil {
 					send2g(&opqBot, packet.FromGroupID, "error:"+err.Error())
 				} else {
 					send2g(&opqBot, packet.FromGroupID, "已添加下载任务，发送status_"+gid+"查看详情")
-					limi += 1
+					limit += 1
 					go ac1.ondown(gid, packet.FromGroupID, packet.FromUserID, &opqBot)
 				}
 			} else {
