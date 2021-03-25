@@ -28,7 +28,7 @@ type aria2c struct {
 func (a *aria2c) Connaria2() error {
 	ctx := context.Background()
 	var no rpc.Notifier
-	rsp, err := rpc.New(ctx, *a.url, *a.token, time.Second*5, no)
+	rsp, err := rpc.New(ctx, *a.url, *a.token, time.Second*20, no)
 	if err != nil {
 		return err
 	}
