@@ -153,9 +153,9 @@ func main() {
 		if strings.HasPrefix(packet.Content, "about") {
 			tmp, err := ac1.a.GetVersion()
 			if err != nil {
-				send2g(&opqBot, packet.FromGroupID, ver+"Aria2 ver: Aria2连接失败"+"BY: Liumik\n本bot用于实现各类下载任务并上传到OneDrive世纪互联供使用者取回文件\n本bot无法侦测下载文件是否违规，因此使用本bot造成的一切问题皆由使用者承担责任，无法接受者请勿使用")
+				send2g(&opqBot, packet.FromGroupID, ver+"Aria2 ver: Aria2连接失败\n"+"BY: Liumik\n本bot用于实现各类下载任务并上传到OneDrive世纪互联供使用者取回文件\n本bot无法侦测下载文件是否违规，因此使用本bot造成的一切问题皆由使用者承担责任，无法接受者请勿使用")
 			}
-			send2g(&opqBot, packet.FromGroupID, ver+"Aria2 ver: "+tmp.Version+"BY: Liumik\n本bot用于实现各类下载任务并上传到OneDrive世纪互联供使用者取回文件\n本bot无法侦测下载文件是否违规，因此使用本bot造成的一切问题皆由使用者承担责任，无法接受者请勿使用")
+			send2g(&opqBot, packet.FromGroupID, ver+"Aria2 ver: "+tmp.Version+"\nBY: Liumik\n本bot用于实现各类下载任务并上传到OneDrive世纪互联供使用者取回文件\n本bot无法侦测下载文件是否违规，因此使用本bot造成的一切问题皆由使用者承担责任，无法接受者请勿使用")
 		}
 	})
 	err = opqBot.AddEvent(OPQBot.EventNameOnFriendMessage, func(botQQ int64, packet OPQBot.FriendMsgPack) {
