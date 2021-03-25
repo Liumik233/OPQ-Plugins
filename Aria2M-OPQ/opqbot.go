@@ -14,7 +14,6 @@ func send2f(m *OPQBot.BotManager, uid int64, content string) {
 		ToUserUid:  uid,
 		Content:    OPQBot.SendTypeTextMsgContent{Content: content},
 		SendToType: OPQBot.SendToTypeFriend,
-		SendType:   OPQBot.SendTypeTextMsg,
 	}) //发送好友消息
 }
 func send2p(m *OPQBot.BotManager, uid int64, gid int64, content string) {
@@ -22,7 +21,6 @@ func send2p(m *OPQBot.BotManager, uid int64, gid int64, content string) {
 		ToUserUid:  uid,
 		Content:    OPQBot.SendTypeTextMsgContentPrivateChat{Content: content, Group: gid},
 		SendToType: OPQBot.SendToTypePrivateChat,
-		SendType:   OPQBot.SendTypeTextMsg,
 	}) //发送群私聊消息
 }
 func send2g(m *OPQBot.BotManager, uid int64, content string) {
@@ -30,7 +28,6 @@ func send2g(m *OPQBot.BotManager, uid int64, content string) {
 		ToUserUid:  uid,
 		Content:    OPQBot.SendTypeTextMsgContent{Content: content},
 		SendToType: OPQBot.SendToTypeGroup,
-		SendType:   OPQBot.SendTypeTextMsg,
 	}) //发送群消息
 }
 func send2gp(m *OPQBot.BotManager, uid int64, content string, picurl string) {
@@ -38,7 +35,6 @@ func send2gp(m *OPQBot.BotManager, uid int64, content string, picurl string) {
 		ToUserUid:  uid,
 		Content:    OPQBot.SendTypePicMsgByUrlContent{Content: content, PicUrl: picurl},
 		SendToType: OPQBot.SendToTypeGroup,
-		SendType:   OPQBot.SendTypePicMsgByUrl,
 	}) //发送群消息
 }
 func Getfile(groupid int64, fileid string, qq string, url1 string) string {
