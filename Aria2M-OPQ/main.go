@@ -13,6 +13,8 @@ import (
 )
 
 var limit int //下载任务限制
+var ver = "Aria2M_for_OPQ_ver.0.2b"
+
 func Exists(path string) bool {
 	_, err := os.Stat(path) //os.Stat获取文件信息
 	if err != nil {
@@ -25,7 +27,7 @@ func Exists(path string) bool {
 }
 func main() {
 	limit = 0
-	fmt.Println("Aria2M_for_OPQ_ver.0.2a")
+	fmt.Println(ver)
 	fmt.Println("By Liumik")
 	if !Exists("./config.json") {
 		tmp := make(map[string]interface{})
@@ -147,6 +149,13 @@ func main() {
 			} else {
 				send2g(&opqBot, packet.FromGroupID, "已移除下载任务")
 			}
+		}
+		if strings.HasPrefix(packet.Content, "about") {
+			tmp, err := ac1.a.GetVersion()
+			if err != nil {
+				send2g(&opqBot, packet.FromGroupID, ver+"Aria2 ver: Aria2连接失败"+"BY: Liumik\n本bot用于实现各类下载任务并上传到OneDrive世纪互联供使用者取回文件\n本bot无法侦测下载文件是否违规，因此使用本bot造成的一切问题皆由使用者承担责任，无法接受者请勿使用")
+			}
+			send2g(&opqBot, packet.FromGroupID, ver+"Aria2 ver: "+tmp.Version+"BY: Liumik\n本bot用于实现各类下载任务并上传到OneDrive世纪互联供使用者取回文件\n本bot无法侦测下载文件是否违规，因此使用本bot造成的一切问题皆由使用者承担责任，无法接受者请勿使用")
 		}
 	})
 	err = opqBot.AddEvent(OPQBot.EventNameOnFriendMessage, func(botQQ int64, packet OPQBot.FriendMsgPack) {
