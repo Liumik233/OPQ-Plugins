@@ -60,8 +60,8 @@ func main() {
 	}
 	cb, _ := ioutil.ReadAll(c1)
 	conf1 := struct {
-		Site  string `Site`
-		Qq    int64  `Qq`
+		Site string `Site`
+		Qq   int64  `Qq`
 	}{}
 	json.Unmarshal(cb, &conf1)
 	opqBot := OPQBot.NewBotManager(conf1.Qq, conf1.Site)
@@ -72,26 +72,26 @@ func main() {
 	defer opqBot.Stop()
 	err = opqBot.AddEvent(OPQBot.EventNameOnGroupMessage, func(botQQ int64, packet OPQBot.GroupMsgPack) {
 		//log.Println(botQQ, packet.Content)
-			if strings.HasPrefix(packet.Content, "禁言") {
-				rt1, _ :=opqBot.GetUserInfo(packet.FromUserID)
-				if rt1.Sex==1{
-					c := strings.Fields(strings.TrimPrefix(packet.Content, "禁言"))
-					if setjy(packet.FromGroupID, strconv.FormatInt(conf1.Qq, 10), conf1.Site, c[0], c[1]) {
-						send2g(&opqBot, packet.FromUserID, "已禁言该成员")
-					} else {
-						send2g(&opqBot, packet.FromUserID, "禁言失败")
-					}
-				}else{
-					send2g(&opqBot, packet.FromUserID, "你没有该权限！！！")
+		if strings.HasPrefix(packet.Content, "禁言") {
+			rt1, _ := opqBot.GetUserInfo(packet.FromUserID)
+			if rt1.Data.Uin == 253145061 {
+				c := strings.Fields(strings.TrimPrefix(packet.Content, "禁言"))
+				if setjy(packet.FromGroupID, strconv.FormatInt(conf1.Qq, 10), conf1.Site, c[0], c[1]) {
+					send2g(&opqBot, packet.FromUserID, "已禁言该成员")
+				} else {
+					send2g(&opqBot, packet.FromUserID, "禁言失败")
 				}
-
+			} else {
+				send2g(&opqBot, packet.FromUserID, "你没有该权限！！！")
 			}
-		if strings.HasPrefix(packet.Content,"设置公告"){
-			c:=strings.Fields(strings.TrimPrefix(packet.Content,"设置公告"))
-			if setgg(packet.FromGroupID,strconv.FormatInt(conf1.Qq, 10),conf1.Site,c[0],c[1]){
-				send2g(&opqBot,packet.FromUserID,"设置公告成功")
-			}else{
-				send2g(&opqBot,packet.FromUserID,"设置公告失败")
+
+		}
+		if strings.HasPrefix(packet.Content, "设置公告") {
+			c := strings.Fields(strings.TrimPrefix(packet.Content, "设置公告"))
+			if setgg(packet.FromGroupID, strconv.FormatInt(conf1.Qq, 10), conf1.Site, c[0], c[1]) {
+				send2g(&opqBot, packet.FromUserID, "设置公告成功")
+			} else {
+				send2g(&opqBot, packet.FromUserID, "设置公告失败")
 			}
 		}
 	})

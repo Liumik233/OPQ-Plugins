@@ -61,8 +61,8 @@
       <module name="OPQ-Plugins" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/Genshin-OPQ/main.go" />
       <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/Genshin-OPQ/main.go" />
       <method v="2" />
     </configuration>
     <recent_temporary>
